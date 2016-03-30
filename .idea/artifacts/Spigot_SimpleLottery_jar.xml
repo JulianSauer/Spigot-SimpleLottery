@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Spigot-SimpleLottery:jar">
+    <output-path>$USER_HOME$/Desktop/Test Server/plugins</output-path>
+    <root id="archive" name="Spigot-SimpleLottery.jar">
+      <element id="module-output" name="Spigot-SimpleLottery" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../spigot-1.9.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
