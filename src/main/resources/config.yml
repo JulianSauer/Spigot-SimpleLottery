@@ -1,0 +1,12 @@
+automode:
+  enabled: true
+  interval: 60
+round:
+  duration: 5
+  multiplier: 10
+messages:
+  round:
+    start: "Round started!"
+    end: "Round ended!"
+    status: "Round ends in "
+  winnerAnnouncement: "The winning ticket is: "
