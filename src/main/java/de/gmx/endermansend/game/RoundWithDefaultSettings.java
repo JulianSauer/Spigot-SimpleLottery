@@ -16,7 +16,14 @@ public class RoundWithDefaultSettings extends RoundInterface {
         tickets = new ArrayList<Ticket>();
     }
 
-    public boolean addPlayerToRound(Player player, int luckyNumber) {
+    /**
+     * Adds a new ticket to the round if it doesn't exist yet
+     *
+     * @param player      Initiator of the lottery entry
+     * @param luckyNumber Lottery number the player chose
+     * @return true if entry could be added
+     */
+    public boolean addLotteryEntry(Player player, int luckyNumber) {
 
         String playerName = player.getName();
         Ticket ticket = new Ticket(playerName, luckyNumber);

@@ -13,7 +13,7 @@ public abstract class RoundInterface {
         this.roundNumber = roundNumber;
     }
 
-    public abstract boolean addPlayerToRound(Player player, int luckyNumber);
+    public abstract boolean addLotteryEntry(Player player, int luckyNumber);
 
     public int getRoundNumber() {
         return roundNumber;
