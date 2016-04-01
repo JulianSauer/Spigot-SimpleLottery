@@ -5,6 +5,9 @@ import de.gmx.endermansend.main.SimpleLottery;
 
 import java.util.HashMap;
 
+/**
+ * Paths for config.yml values
+ */
 public class ConfigHandler extends ConfigHandlerInterface {
 
     public ConfigHandler(SimpleLottery plugin) {
@@ -29,20 +32,11 @@ public class ConfigHandler extends ConfigHandlerInterface {
 
     public HashMap<String, String> getMessages() {
 
-        if (!config.isSet("messages.round.start"))
-            noValueFound("messages.round.start");
-        if (!config.isSet("messages.round.end"))
-            noValueFound("messages.round.end");
-        if (!config.isSet("messages.round.status"))
-            noValueFound("messages.round.status");
-        if (!config.isSet("messages.winnerAnnouncement"))
-            noValueFound("messages.winnerAnnouncement");
-
         HashMap<String, String> messages = new HashMap<String, String>();
-        messages.put("round.start", config.getString("messages.round.start"));
-        messages.put("round.end", config.getString("messages.round.end"));
-        messages.put("round.status", config.getString("messages.round.status"));
-        messages.put("winnerAnnouncement", config.getString("messages.winnerAnnouncement"));
+        messages.put("round.start", getStringFromConfig("messages.round.start"));
+        messages.put("round.end", getStringFromConfig("messages.round.end"));
+        messages.put("round.status", getStringFromConfig("messages.round.status"));
+        messages.put("winnerAnnouncement", getStringFromConfig("messages.winnerAnnouncement"));
 
         return messages;
 

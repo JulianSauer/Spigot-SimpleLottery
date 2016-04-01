@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 public abstract class ConfigHandlerInterface {
@@ -74,9 +75,27 @@ public abstract class ConfigHandlerInterface {
     }
 
     protected int getIntFromConfig(String path) {
-        if (!config.isSet(path) || !config.isBoolean(path))
+        if (!config.isSet(path) || !config.isInt(path))
             noValueFound(path);
         return config.getInt(path);
+    }
+
+    protected double getDoubleFromConfig(String path) {
+        if (!config.isSet(path) || !config.isDouble(path))
+            noValueFound(path);
+        return config.getDouble(path);
+    }
+
+    protected String getStringFromConfig(String path) {
+        if (!config.isSet(path) || !config.isString(path))
+            noValueFound(path);
+        return config.getString(path);
+    }
+
+    protected List getListFromConfig(String path) {
+        if (!config.isSet(path) || !config.isList(path))
+            noValueFound(path);
+        return config.getList(path);
     }
 
     protected void noValueFound(String value) {
