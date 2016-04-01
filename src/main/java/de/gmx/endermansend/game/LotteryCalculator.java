@@ -4,21 +4,13 @@ import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
 
 public class LotteryCalculator implements LotteryCalculatorInterface {
 
-    private int roundNumber;
     private int[] range;
 
     public LotteryCalculator() {
-        roundNumber = 1;
         range = new int[]{1, 100};
     }
 
-    public LotteryCalculator(int roundNumber) {
-        this();
-        setRoundNumber(roundNumber);
-    }
-
     public LotteryCalculator(int[] range) {
-        this();
         setRange(range);
     }
 
@@ -27,32 +19,14 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
         setRange(min, max);
     }
 
-    public LotteryCalculator(int roundNumber, int[] range) {
-        setRoundNumber(roundNumber);
-        setRange(range);
-    }
-
-    public LotteryCalculator(int roundNumber, int min, int max) {
-        setRoundNumber(roundNumber);
-        setRange(min, max);
-    }
-
     public Ticket getWinnerTicket() {
         int winnerNumber = range[0] + (int)(Math.random() * ((range[1] - range[0]) + 1));
-        Ticket winnerTicket = new Ticket(roundNumber, winnerNumber);
+        Ticket winnerTicket = new Ticket(winnerNumber);
         return winnerTicket;
-    }
-
-    public int getRoundNumber() {
-        return roundNumber;
     }
 
     public int[] getRange() {
         return new int[0];
-    }
-
-    public void setRoundNumber(int roundNumber) {
-        this.roundNumber = roundNumber;
     }
 
     public boolean setRange(int range[]) {

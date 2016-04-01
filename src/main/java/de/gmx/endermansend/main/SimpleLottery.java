@@ -41,7 +41,7 @@ public class SimpleLottery extends JavaPlugin {
             else
                 calc = new LotteryCalculator(1, 100);
 
-            logger.info("Winner: " + calc.getWinnerTicket().getTicketNumber());
+            logger.info("Winner: " + calc.getWinnerTicket().getLuckyNumber());
 
             return true;
 

@@ -6,11 +6,7 @@ public interface LotteryCalculatorInterface {
 
     Ticket getWinnerTicket();
 
-    int getRoundNumber();
-
     int[] getRange();
-
-    void setRoundNumber(int roundNumber);
 
     boolean setRange(int[] range);
 
