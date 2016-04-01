@@ -107,6 +107,9 @@ public abstract class ConfigHandlerInterface {
     private boolean configExists() {
 
         File[] files = plugin.getDataFolder().listFiles();
+        if(files == null)
+            return false;
+
         for (File file : files) {
             if (file.getName().equals("config.yml")) {
                 return true;
