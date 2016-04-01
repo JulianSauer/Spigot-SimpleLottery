@@ -2,3 +2,7 @@ name: SimpleLottery
 version: 0.1
 author: EndermansEnd
 main: de.gmx.endermansend.main.SimpleLottery
+commands:
+  lottery:
+    description: Currently a test command
+    usage: /lottery
