@@ -4,7 +4,6 @@ import de.gmx.endermansend.game.LotteryCalculator;
 import de.gmx.endermansend.game.LotteryCoordinatorAuto;
 import de.gmx.endermansend.handlers.ConfigHandler;
 import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
-import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -25,7 +24,7 @@ public class SimpleLottery extends JavaPlugin {
         this.logger = getLogger();
         this.config = new ConfigHandler(this);
 
-        lottery = new LotteryCoordinatorAuto(new LotteryCalculator(1, 10), logger);
+        lottery = new LotteryCoordinatorAuto(config, new LotteryCalculator(1, 10));
 
         logger.info("SimpleLottery enabled");
 
@@ -43,11 +42,11 @@ public class SimpleLottery extends JavaPlugin {
 
             if(args.length == 1) {
 
-                if(args[0].equalsIgnoreCase("start")) {
-                    lottery.startNewGame();
+                if (args[0].equalsIgnoreCase("start")) {
+                    lottery.startNewGame(sender);
                     return true;
-                } else if(args[0].equalsIgnoreCase("stop")) {
-                    lottery.finishGame();
+                } else if (args[0].equalsIgnoreCase("stop")) {
+                    lottery.finishGame(sender);
                     return true;
                 }
 
@@ -57,11 +56,10 @@ public class SimpleLottery extends JavaPlugin {
                     Player player = (Player) sender;
                     int luckyNumber = Integer.parseInt(args[1]);
                     lottery.addPlayer(player, luckyNumber);
+                    return true;
                 }
 
             }
-
-            return true;
 
         }
 

@@ -35,8 +35,15 @@ public class ConfigHandler extends ConfigHandlerInterface {
         HashMap<String, String> messages = new HashMap<String, String>();
         messages.put("round.start", getStringFromConfig("messages.round.start"));
         messages.put("round.end", getStringFromConfig("messages.round.end"));
-        messages.put("round.status", getStringFromConfig("messages.round.status"));
-        messages.put("winnerAnnouncement", getStringFromConfig("messages.winnerAnnouncement"));
+        messages.put("round.status.statusMessage", getStringFromConfig("messages.round.status.statusMessage"));
+        messages.put("round.status.running", getStringFromConfig("messages.round.status.running"));
+        messages.put("round.status.halted", getStringFromConfig("messages.round.status.halted"));
+        messages.put("round.status.ended", getStringFromConfig("messages.round.status.ended"));
+        messages.put("round.winningNumber", getStringFromConfig("messages.round.winningNumber"));
+        messages.put("round.winners", getStringFromConfig("messages.round.winners"));
+        messages.put("round.noWinners", getStringFromConfig("messages.round.noWinners"));
+        messages.put("ticket.bought", getStringFromConfig("messages.ticket.bought"));
+        messages.put("ticket.failure", getStringFromConfig("messages.ticket.failure"));
 
         return messages;
 

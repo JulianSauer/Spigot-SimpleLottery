@@ -56,6 +56,10 @@ public abstract class RoundInterface {
 
     public abstract Collection<String> getOwnersOf(int luckyNumber);
 
+    public Status getStatus() {
+        return status;
+    }
+
     protected boolean changeStatusTo(Status status) {
         if (this.status == Status.GAME_HAS_FINISHED ||
                 this.status == status)
