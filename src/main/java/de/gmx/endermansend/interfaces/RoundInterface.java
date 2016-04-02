@@ -4,8 +4,11 @@ import de.gmx.endermansend.game.Ticket;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
+import java.util.List;
 
 public abstract class RoundInterface {
+
+    protected Collection<Ticket> tickets;
 
     public enum Status {
         GAME_IS_RUNNING,

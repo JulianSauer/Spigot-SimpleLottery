@@ -9,8 +9,6 @@ import java.util.List;
 
 public class RoundWithDefaultSettings extends RoundInterface {
 
-    protected List<Ticket> tickets;
-
     public RoundWithDefaultSettings(int roundNumber) {
         super(roundNumber);
         tickets = new ArrayList<Ticket>();
