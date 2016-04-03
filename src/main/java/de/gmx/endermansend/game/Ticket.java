@@ -2,22 +2,22 @@ package de.gmx.endermansend.game;
 
 public class Ticket {
 
-    private int luckyNumber;
+    private int ticketNumber;
 
     private String owner;
 
-    public Ticket(int luckyNumber) {
-        this.luckyNumber = luckyNumber;
+    public Ticket(int ticketNumber) {
+        this.ticketNumber = ticketNumber;
         owner = null;
     }
 
-    public Ticket(String owner, int luckyNumber) {
+    public Ticket(String owner, int ticketNumber) {
         this.owner = owner;
-        this.luckyNumber = luckyNumber;
+        this.ticketNumber = ticketNumber;
     }
 
-    public int getLuckyNumber() {
-        return luckyNumber;
+    public int getTicketNumber() {
+        return ticketNumber;
     }
 
     public String getOwner() {
@@ -30,7 +30,7 @@ public class Ticket {
         if (o instanceof Ticket) {
             Ticket t = (Ticket) o;
             if (this.owner.equalsIgnoreCase(t.owner))
-                return this.luckyNumber == t.luckyNumber;
+                return this.ticketNumber == t.ticketNumber;
         }
 
         return false;
@@ -39,6 +39,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "\nOwner: " + owner + " Lucky Number: " + luckyNumber;
+        return "\nOwner: " + owner + " Ticket Number: " + ticketNumber;
     }
 }

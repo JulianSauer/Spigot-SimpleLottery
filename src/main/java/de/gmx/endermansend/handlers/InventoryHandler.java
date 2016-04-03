@@ -32,7 +32,7 @@ public class InventoryHandler {
 
         ItemStack ticketItem = new ItemStack(Material.PAPER, 1);
         ItemMeta meta = ticketItem.getItemMeta();
-        meta.setDisplayName("Lucky Number: " + ticket.getLuckyNumber());
+        meta.setDisplayName("Ticket Number: " + ticket.getTicketNumber());
         ArrayList<String> lore = new ArrayList<String>();
         lore.add("Round #" + roundNumber);
         meta.setLore(lore);

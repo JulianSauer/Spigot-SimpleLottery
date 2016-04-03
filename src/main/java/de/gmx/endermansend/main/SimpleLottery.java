@@ -40,7 +40,7 @@ public class SimpleLottery extends JavaPlugin {
 
         if (cmd.getName().equalsIgnoreCase("lottery")) {
 
-            if(args.length == 1) {
+            if (args.length == 1) {
 
                 if (args[0].equalsIgnoreCase("start")) {
                     lottery.startNewGame(sender);
@@ -55,10 +55,10 @@ public class SimpleLottery extends JavaPlugin {
 
             } else if (args.length == 2) {
 
-                if(args[0].equalsIgnoreCase("buyTicket") && sender instanceof Player) {
+                if (args[0].equalsIgnoreCase("buyTicket") && sender instanceof Player) {
                     Player player = (Player) sender;
-                    int luckyNumber = Integer.parseInt(args[1]);
-                    lottery.addPlayer(player, luckyNumber);
+                    int ticketNumber = Integer.parseInt(args[1]);
+                    lottery.addPlayer(player, ticketNumber);
                     return true;
                 }
 

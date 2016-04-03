@@ -18,19 +18,19 @@ public class RoundWithDefaultSettings extends RoundInterface {
     /**
      * Adds a new ticket to the round if it doesn't exist yet
      *
-     * @param player      Initiator of the lottery entry
-     * @param luckyNumber Lottery number the player chose
+     * @param player       Initiator of the lottery entry
+     * @param ticketNumber Lottery number the player chose
      * @return true if entry could be added
      */
-    public boolean addLotteryEntry(Player player, int luckyNumber) {
+    public boolean addLotteryEntry(Player player, int ticketNumber) {
 
         String playerName = player.getName();
-        Ticket ticket = new Ticket(playerName, luckyNumber);
+        Ticket ticket = new Ticket(playerName, ticketNumber);
 
         if (tickets.contains(ticket))
             return false;
 
-        if(!InventoryHandler.giveTicketToPlayer(player, ticket, roundNumber))
+        if (!InventoryHandler.giveTicketToPlayer(player, ticket, roundNumber))
             return false;
         tickets.add(ticket);
         return true;
@@ -50,19 +50,19 @@ public class RoundWithDefaultSettings extends RoundInterface {
         for (Ticket t : tickets) {
             owner = t.getOwner();
             if (owner.equalsIgnoreCase(playerName))
-                playerTickets.add(t.getLuckyNumber());
+                playerTickets.add(t.getTicketNumber());
         }
 
         return playerTickets;
 
     }
 
-    public Collection<String> getOwnersOf(int luckyNumber) {
+    public Collection<String> getOwnersOf(int ticketNumber) {
 
         List<String> owners = new ArrayList<String>();
 
         for (Ticket t : tickets) {
-            if (luckyNumber == t.getLuckyNumber())
+            if (ticketNumber == t.getTicketNumber())
                 owners.add(t.getOwner());
         }
 

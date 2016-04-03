@@ -17,5 +17,5 @@ messages:
     winners: "Winner(s):"
     noWinners: "Nobody won :("
   ticket:
-    bought: "You succesfully bought a ticket. Your lucky number is <<luckyNumber>>!"
-    failure: "Couldn't buy ticket with lucky number <<luckyNumber>>"
+    bought: "You succesfully bought a ticket. Your ticket number is <<ticketNumber>>!"
+    failure: "Couldn't buy ticket with ticket number <<ticketNumber>>"

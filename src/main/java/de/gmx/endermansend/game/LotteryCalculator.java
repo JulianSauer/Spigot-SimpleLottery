@@ -20,7 +20,7 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
     }
 
     public Ticket getWinnerTicket() {
-        int winnerNumber = range[0] + (int)(Math.random() * ((range[1] - range[0]) + 1));
+        int winnerNumber = range[0] + (int) (Math.random() * ((range[1] - range[0]) + 1));
         Ticket winnerTicket = new Ticket(winnerNumber);
         return winnerTicket;
     }
@@ -31,7 +31,7 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
 
     public boolean setRange(int range[]) {
 
-        if(range.length != 2)
+        if (range.length != 2)
             return false;
 
         return setRange(range[0], range[1]);
@@ -40,7 +40,7 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
 
     public boolean setRange(int min, int max) {
 
-        if(max <= min ||
+        if (max <= min ||
                 max < 0 ||
                 min < 0)
             return false;

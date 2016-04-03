@@ -4,7 +4,6 @@ import de.gmx.endermansend.game.Ticket;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
-import java.util.List;
 
 public abstract class RoundInterface {
 
@@ -36,17 +35,17 @@ public abstract class RoundInterface {
         return changeStatusTo(Status.GAME_HAS_FINISHED);
     }
 
-    public abstract boolean addLotteryEntry(Player player, int luckyNumber);
+    public abstract boolean addLotteryEntry(Player player, int ticketNumber);
 
     /**
-     * Finishes the round and returns the owners of tickets with matching luckyNumbers
+     * Finishes the round and returns the owners of tickets with matching ticketNumbers
      *
-     * @param luckyNumber Number which won the round
+     * @param ticketNumber Number which won the round
      * @return List of ticket owners
      */
-    public Collection<String> finishRound(int luckyNumber) {
+    public Collection<String> finishRound(int ticketNumber) {
         status = Status.GAME_HAS_FINISHED;
-        return getOwnersOf(luckyNumber);
+        return getOwnersOf(ticketNumber);
     }
 
     public int getRoundNumber() {
@@ -57,7 +56,7 @@ public abstract class RoundInterface {
 
     public abstract Collection<Integer> getTicketsOf(Player player);
 
-    public abstract Collection<String> getOwnersOf(int luckyNumber);
+    public abstract Collection<String> getOwnersOf(int ticketNumber);
 
     public Status getStatus() {
         return status;

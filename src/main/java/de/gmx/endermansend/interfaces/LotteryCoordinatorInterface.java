@@ -1,12 +1,10 @@
 package de.gmx.endermansend.interfaces;
 
 import de.gmx.endermansend.game.RoundWithDefaultSettings;
-import de.gmx.endermansend.game.Ticket;
 import de.gmx.endermansend.handlers.ChatHandler;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class LotteryCoordinatorInterface {
@@ -40,7 +38,7 @@ public abstract class LotteryCoordinatorInterface {
     public void finishGame(CommandSender sender) {
 
         Collection<String> winners;
-        int winningNumber = calc.getWinnerTicket().getLuckyNumber();
+        int winningNumber = calc.getWinnerTicket().getTicketNumber();
 
         if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED) {
             chat.sendErrorMessage(sender, "Game #" + roundNumber + " has already stopped.");
@@ -52,19 +50,19 @@ public abstract class LotteryCoordinatorInterface {
 
     }
 
-    public void addPlayer(Player player, int luckyNumber) {
+    public void addPlayer(Player player, int ticketNumber) {
 
-        if (round.addLotteryEntry(player, luckyNumber)) {
-            chat.sendTicketBought(player, luckyNumber);
+        if (round.addLotteryEntry(player, ticketNumber)) {
+            chat.sendTicketBought(player, ticketNumber);
         } else {
-            chat.sendTicketFailure(player, luckyNumber);
+            chat.sendTicketFailure(player, ticketNumber);
         }
 
     }
 
     public void listTickets(CommandSender sender) {
 
-        if(round == null) {
+        if (round == null) {
             chat.sendErrorMessage(sender, "No round was started yet!");
             return;
         }

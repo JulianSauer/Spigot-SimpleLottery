@@ -13,7 +13,7 @@ public abstract class ChatHandlerInterface {
 
     protected String errorTag;
 
-    protected String noTag;
+    protected String listTag;
 
     protected HashMap<String, String> messages;
 
@@ -26,7 +26,7 @@ public abstract class ChatHandlerInterface {
     }
 
     protected void broadcastUntaggedMessage(String msg) {
-        Bukkit.broadcastMessage(noTag + " " + msg);
+        Bukkit.broadcastMessage(listTag + " " + msg);
     }
 
     public void sendMessage(CommandSender receiver, String msg) {
@@ -47,8 +47,8 @@ public abstract class ChatHandlerInterface {
 
     public abstract void broadcastPlayersOfRound(RoundInterface round);
 
-    public abstract void sendTicketBought(Player receiver, int luckyNumber);
+    public abstract void sendTicketBought(Player receiver, int ticketNumber);
 
-    public abstract void sendTicketFailure(Player receiver, int luckyNumber);
+    public abstract void sendTicketFailure(Player receiver, int ticketNumber);
 
 }

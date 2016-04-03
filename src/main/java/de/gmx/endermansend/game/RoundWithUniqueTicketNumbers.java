@@ -2,14 +2,14 @@ package de.gmx.endermansend.game;
 
 import org.bukkit.entity.Player;
 
-public class RoundWithUniqueParticipants extends RoundWithDefaultSettings {
+public class RoundWithUniqueTicketNumbers extends RoundWithDefaultSettings {
 
-    public RoundWithUniqueParticipants(int roundNumber) {
+    public RoundWithUniqueTicketNumbers(int roundNumber) {
         super(roundNumber);
     }
 
     /**
-     * Allows only one entry per player
+     * Allows only one entry per ticketNumber
      *
      * @param player       Initiator of the lottery entry
      * @param ticketNumber Lottery number the player chose
@@ -18,7 +18,7 @@ public class RoundWithUniqueParticipants extends RoundWithDefaultSettings {
     public boolean addLotteryEntry(Player player, int ticketNumber) {
 
         for (Ticket t : tickets) {
-            if (t.getOwner().equalsIgnoreCase(player.getName()))
+            if (ticketNumber == t.getTicketNumber())
                 return false;
         }
 

@@ -18,7 +18,7 @@ public class ChatHandler extends ChatHandlerInterface {
 
         pluginTag = ChatColor.GOLD + "[Simple Lottery]" + ChatColor.RESET;
         errorTag = ChatColor.RED + "[Simple Lottery]" + ChatColor.RESET;
-        noTag = "                     - ";
+        listTag = "                     - ";
 
     }
 
@@ -71,16 +71,16 @@ public class ChatHandler extends ChatHandlerInterface {
 
         ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
         broadcastMessage("Bought tickets:");
-        for(Ticket ticket : tickets)
-            broadcastUntaggedMessage(ticket.getOwner() + ": " + ticket.getLuckyNumber());
+        for (Ticket ticket : tickets)
+            broadcastUntaggedMessage(ticket.getOwner() + ": " + ticket.getTicketNumber());
     }
 
-    public void sendTicketBought(Player receiver, int luckyNumber) {
-        sendMessage(receiver, messages.get("ticket.bought").replace("<<luckyNumber>>", "" + luckyNumber));
+    public void sendTicketBought(Player receiver, int ticketNumber) {
+        sendMessage(receiver, messages.get("ticket.bought").replace("<<ticketNumber>>", "" + ticketNumber));
     }
 
-    public void sendTicketFailure(Player receiver, int luckyNumber) {
-        sendMessage(receiver, messages.get("ticket.failure").replace("<<luckyNumber>>", "" + luckyNumber));
+    public void sendTicketFailure(Player receiver, int ticketNumber) {
+        sendMessage(receiver, messages.get("ticket.failure").replace("<<ticketNumber>>", "" + ticketNumber));
     }
 
 }
