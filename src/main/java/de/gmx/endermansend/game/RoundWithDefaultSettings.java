@@ -1,5 +1,6 @@
 package de.gmx.endermansend.game;
 
+import de.gmx.endermansend.handlers.InventoryHandler;
 import de.gmx.endermansend.interfaces.RoundInterface;
 import org.bukkit.entity.Player;
 
@@ -29,6 +30,8 @@ public class RoundWithDefaultSettings extends RoundInterface {
         if (tickets.contains(ticket))
             return false;
 
+        if(!InventoryHandler.giveTicketToPlayer(player, ticket, roundNumber))
+            return false;
         tickets.add(ticket);
         return true;
 

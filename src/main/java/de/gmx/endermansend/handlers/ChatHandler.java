@@ -1,11 +1,13 @@
 package de.gmx.endermansend.handlers;
 
+import de.gmx.endermansend.game.Ticket;
 import de.gmx.endermansend.interfaces.ChatHandlerInterface;
 import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.interfaces.RoundInterface;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class ChatHandler extends ChatHandlerInterface {
@@ -16,7 +18,7 @@ public class ChatHandler extends ChatHandlerInterface {
 
         pluginTag = ChatColor.GOLD + "[Simple Lottery]" + ChatColor.RESET;
         errorTag = ChatColor.RED + "[Simple Lottery]" + ChatColor.RESET;
-        noTag = "                       ";
+        noTag = "                     - ";
 
     }
 
@@ -63,6 +65,14 @@ public class ChatHandler extends ChatHandlerInterface {
             broadcastMessage(messages.get("round.noWinners"));
         }
 
+    }
+
+    public void broadcastPlayersOfRound(RoundInterface round) {
+
+        ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
+        broadcastMessage("Bought tickets:");
+        for(Ticket ticket : tickets)
+            broadcastUntaggedMessage(ticket.getOwner() + ": " + ticket.getLuckyNumber());
     }
 
     public void sendTicketBought(Player receiver, int luckyNumber) {

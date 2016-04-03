@@ -1,10 +1,12 @@
 package de.gmx.endermansend.interfaces;
 
 import de.gmx.endermansend.game.RoundWithDefaultSettings;
+import de.gmx.endermansend.game.Ticket;
 import de.gmx.endermansend.handlers.ChatHandler;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class LotteryCoordinatorInterface {
@@ -30,7 +32,7 @@ public abstract class LotteryCoordinatorInterface {
                 return;
             }
         }
-        round = new RoundWithDefaultSettings(roundNumber++);
+        round = new RoundWithDefaultSettings(++roundNumber);
         chat.broadcastRoundStart(roundNumber);
 
     }
@@ -58,6 +60,15 @@ public abstract class LotteryCoordinatorInterface {
             chat.sendTicketFailure(player, luckyNumber);
         }
 
+    }
+
+    public void listTickets(CommandSender sender) {
+
+        if(round == null) {
+            chat.sendErrorMessage(sender, "No round was started yet!");
+            return;
+        }
+        chat.broadcastPlayersOfRound(round);
     }
 
 }

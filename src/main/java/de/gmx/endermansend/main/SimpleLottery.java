@@ -48,6 +48,9 @@ public class SimpleLottery extends JavaPlugin {
                 } else if (args[0].equalsIgnoreCase("stop")) {
                     lottery.finishGame(sender);
                     return true;
+                } else if (args[0].equalsIgnoreCase("list")) {
+                    lottery.listTickets(sender);
+                    return true;
                 }
 
             } else if (args.length == 2) {

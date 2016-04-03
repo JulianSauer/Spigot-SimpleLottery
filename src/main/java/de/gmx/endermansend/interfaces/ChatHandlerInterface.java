@@ -21,11 +21,11 @@ public abstract class ChatHandlerInterface {
         messages = config.getMessages();
     }
 
-    public void broadcastMessage(String msg) {
+    protected void broadcastMessage(String msg) {
         Bukkit.broadcastMessage(pluginTag + " " + msg);
     }
 
-    public void broadcastUntaggedMessage(String msg) {
+    protected void broadcastUntaggedMessage(String msg) {
         Bukkit.broadcastMessage(noTag + " " + msg);
     }
 
@@ -44,6 +44,8 @@ public abstract class ChatHandlerInterface {
     public abstract void broadcastStatus(RoundInterface round);
 
     public abstract void broadcastWinners(int roundNumber, int winningNumber, Collection<String> winners);
+
+    public abstract void broadcastPlayersOfRound(RoundInterface round);
 
     public abstract void sendTicketBought(Player receiver, int luckyNumber);
 
