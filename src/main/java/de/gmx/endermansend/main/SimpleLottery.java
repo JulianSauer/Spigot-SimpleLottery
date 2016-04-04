@@ -5,10 +5,8 @@ import de.gmx.endermansend.game.LotteryCoordinatorAuto;
 import de.gmx.endermansend.handlers.ChatHandler;
 import de.gmx.endermansend.handlers.ConfigHandler;
 import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
+import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -19,6 +17,7 @@ public class SimpleLottery extends JavaPlugin {
     private ConfigHandlerInterface config;
     private LotteryCoordinatorInterface lottery;
     private ChatHandler chat;
+    private LotteryCalculatorInterface calc;
 
     @Override
     public void onEnable() {
@@ -26,9 +25,10 @@ public class SimpleLottery extends JavaPlugin {
         this.logger = getLogger();
         this.config = new ConfigHandler(this);
         this.chat = new ChatHandler(config);
+        this.calc = new LotteryCalculator(1, 10);
 
-        lottery = new LotteryCoordinatorAuto(config, new LotteryCalculator(1, 10));
-        this.getCommand("lottery").setExecutor(new SimpleLotteryCommandExecutor(lottery, chat));
+        lottery = new LotteryCoordinatorAuto(this);
+        this.getCommand("lottery").setExecutor(new SimpleLotteryCommandExecutor(this));
 
         logger.info("SimpleLottery enabled");
 
@@ -39,4 +39,19 @@ public class SimpleLottery extends JavaPlugin {
         System.out.println("SimpleLottery disabled");
     }
 
+    public ConfigHandlerInterface getConfigHandler() {
+        return config;
+    }
+
+    public LotteryCoordinatorInterface getLottery() {
+        return lottery;
+    }
+
+    public ChatHandler getChat() {
+        return chat;
+    }
+
+    public LotteryCalculatorInterface getCalc() {
+        return calc;
+    }
 }

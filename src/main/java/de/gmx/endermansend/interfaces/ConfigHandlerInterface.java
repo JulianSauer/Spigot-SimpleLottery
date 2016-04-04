@@ -10,14 +10,14 @@ import java.util.logging.Logger;
 
 public abstract class ConfigHandlerInterface {
 
-    private SimpleLottery plugin;
+    private SimpleLottery main;
     protected Logger logger;
     protected FileConfiguration config;
 
-    public ConfigHandlerInterface(SimpleLottery plugin) {
+    public ConfigHandlerInterface(SimpleLottery main) {
 
-        this.plugin = plugin;
-        this.logger = this.plugin.getLogger();
+        this.main = main;
+        this.logger = this.main.getLogger();
 
         if (!loadConfig())
             createDefaultConfig();
@@ -31,9 +31,9 @@ public abstract class ConfigHandlerInterface {
     public void createDefaultConfig() {
 
         logger.info("Creating default config");
-        plugin.saveDefaultConfig();
+        main.saveDefaultConfig();
 
-        config = plugin.getConfig();
+        config = main.getConfig();
         logger.info("Config loaded");
 
     }
@@ -43,7 +43,7 @@ public abstract class ConfigHandlerInterface {
         logger.info("Loading config");
 
         if (this.configExists()) {
-            config = plugin.getConfig();
+            config = main.getConfig();
             logger.info("Config loaded");
             return true;
         }
@@ -54,7 +54,7 @@ public abstract class ConfigHandlerInterface {
 
     public void saveConfig() {
         logger.info("Saving config");
-        plugin.saveConfig();
+        main.saveConfig();
         logger.info("Config saved");
     }
 
@@ -106,7 +106,7 @@ public abstract class ConfigHandlerInterface {
 
     private boolean configExists() {
 
-        File[] files = plugin.getDataFolder().listFiles();
+        File[] files = main.getDataFolder().listFiles();
         if (files == null)
             return false;
 

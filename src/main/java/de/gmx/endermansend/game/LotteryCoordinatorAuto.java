@@ -1,13 +1,12 @@
 package de.gmx.endermansend.game;
 
-import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
-import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
+import de.gmx.endermansend.main.SimpleLottery;
 
 public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {
 
-    public LotteryCoordinatorAuto(ConfigHandlerInterface config, LotteryCalculatorInterface calc) {
-        super(config, calc);
+    public LotteryCoordinatorAuto(SimpleLottery main) {
+        super(main);
     }
 
 }

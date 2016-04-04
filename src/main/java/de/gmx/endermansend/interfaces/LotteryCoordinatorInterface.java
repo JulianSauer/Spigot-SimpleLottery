@@ -1,7 +1,7 @@
 package de.gmx.endermansend.interfaces;
 
 import de.gmx.endermansend.game.RoundWithDefaultSettings;
-import de.gmx.endermansend.handlers.ChatHandler;
+import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -17,9 +17,9 @@ public abstract class LotteryCoordinatorInterface {
 
     private ChatHandlerInterface chat;
 
-    public LotteryCoordinatorInterface(ConfigHandlerInterface config, LotteryCalculatorInterface calc) {
-        this.calc = calc;
-        chat = new ChatHandler(config);
+    public LotteryCoordinatorInterface(SimpleLottery main) {
+        this.calc = main.getCalc();
+        chat = main.getChat();
     }
 
     public void startNewGame(CommandSender sender) {

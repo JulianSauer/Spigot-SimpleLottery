@@ -12,9 +12,9 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
     LotteryCoordinatorInterface lottery;
     ChatHandler chat;
 
-    public SimpleLotteryCommandExecutor(LotteryCoordinatorInterface lottery, ChatHandler chat) {
-        this.lottery = lottery;
-        this.chat = chat;
+    public SimpleLotteryCommandExecutor(SimpleLottery main) {
+        this.lottery = main.getLottery();
+        this.chat = main.getChat();
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
