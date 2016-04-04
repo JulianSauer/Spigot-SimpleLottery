@@ -60,9 +60,13 @@ public class InventoryHandler {
         ItemStack ticketItem = new ItemStack(Material.PAPER, 1);
         ItemMeta meta = ticketItem.getItemMeta();
         meta.setDisplayName("Ticket Number: " + ticket.getTicketNumber());
+
         ArrayList<String> lore = new ArrayList<String>();
         lore.add("Round #" + roundNumber);
+        ItemStack bet = ticket.getBet();
+        lore.add("Bet: " + bet.getType().name() + " (" + bet.getAmount() + ")");
         meta.setLore(lore);
+
         ticketItem.setItemMeta(meta);
         return ticketItem;
 
