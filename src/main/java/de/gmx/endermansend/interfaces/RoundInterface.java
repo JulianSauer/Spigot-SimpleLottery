@@ -54,8 +54,6 @@ public abstract class RoundInterface {
 
     public abstract boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet);
 
-    // TODO: Replace with handOutRewards()
-
     /**
      * Finishes the round and returns the owners of tickets that won.
      *
@@ -64,7 +62,7 @@ public abstract class RoundInterface {
      */
     public Collection<String> finishRound(int ticketNumber) {
         status = Status.GAME_HAS_FINISHED;
-        return getOwnersOf(ticketNumber);
+        return handOutRewards(ticketNumber);
     }
 
     public int getRoundNumber() {
