@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 public abstract class ConfigHandlerInterface {
 
     private SimpleLottery main;
-    protected Logger logger;
-    protected FileConfiguration config;
+    private Logger logger;
+    private FileConfiguration config;
 
-    public ConfigHandlerInterface(SimpleLottery main) {
+    protected ConfigHandlerInterface(SimpleLottery main) {
 
         this.main = main;
         this.logger = this.main.getLogger();
@@ -25,42 +25,15 @@ public abstract class ConfigHandlerInterface {
 
     }
 
-    /**
-     * Saves default configuration file and assigns it's content to config
-     */
-    public void createDefaultConfig() {
-
-        logger.info("Creating default config");
-        main.saveDefaultConfig();
-
-        config = main.getConfig();
-        logger.info("Config loaded");
-
-    }
-
-    public boolean loadConfig() {
-
-        logger.info("Loading config");
-
-        if (this.configExists()) {
-            config = main.getConfig();
-            logger.info("Config loaded");
-            return true;
-        }
-
-        return false;
-
-    }
-
     public void saveConfig() {
         logger.info("Saving config");
         main.saveConfig();
         logger.info("Config saved");
     }
 
-    public abstract boolean getAutomodeEnabled();
+    public abstract boolean getAutoModeEnabled();
 
-    public abstract int getAutomodeInterval();
+    public abstract int getAutoModeInterval();
 
     public abstract int getRoundDuration();
 
@@ -103,13 +76,40 @@ public abstract class ConfigHandlerInterface {
         return list;
     }
 
-    protected void noValueFound(String value) {
+    /**
+     * Saves default configuration file and assigns it's content to config
+     */
+    private void createDefaultConfig() {
+
+        logger.info("Creating default config");
+        main.saveDefaultConfig();
+
+        config = main.getConfig();
+        logger.info("Config loaded");
+
+    }
+
+    private boolean loadConfig() {
+
+        logger.info("Loading config");
+
+        if (this.configExists()) {
+            config = main.getConfig();
+            logger.info("Config loaded");
+            return true;
+        }
+
+        return false;
+
+    }
+
+    private void noValueFound(String value) {
         logger.warning("Value is missing or of wrong type: " + value);
         logger.warning("Using default value");
         logger.warning("Delete config.yml to get a default one");
     }
 
-    protected void noListFound(String path) {
+    private void noListFound(String path) {
         logger.warning("Could not find list in config.yml: " + path);
         logger.warning("Delete config.yml to get a default one");
     }

@@ -36,7 +36,7 @@ public class SimpleLottery extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        System.out.println("SimpleLottery disabled");
+        logger.info("SimpleLottery disabled");
     }
 
     public ConfigHandlerInterface getConfigHandler() {

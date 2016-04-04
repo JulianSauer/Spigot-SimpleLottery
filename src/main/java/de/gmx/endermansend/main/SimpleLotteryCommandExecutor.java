@@ -1,25 +1,20 @@
 package de.gmx.endermansend.main;
 
 import de.gmx.endermansend.handlers.ChatHandler;
-import de.gmx.endermansend.handlers.InventoryHandler;
-import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
     private LotteryCoordinatorInterface lottery;
     private ChatHandler chat;
-    private ConfigHandlerInterface config;
 
     public SimpleLotteryCommandExecutor(SimpleLottery main) {
         this.lottery = main.getLottery();
         this.chat = main.getChat();
-        this.config = main.getConfigHandler();
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {

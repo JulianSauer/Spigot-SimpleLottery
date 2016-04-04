@@ -11,7 +11,7 @@ public abstract class RoundInterface {
 
     protected Collection<Ticket> tickets;
 
-    protected SimpleLottery main;
+    private SimpleLottery main;
 
     protected ChatHandlerInterface chat;
 
@@ -24,9 +24,9 @@ public abstract class RoundInterface {
     }
 
     protected int roundNumber;
-    protected Status status;
+    private Status status;
 
-    public RoundInterface(SimpleLottery main, int roundNumber) {
+    protected RoundInterface(SimpleLottery main, int roundNumber) {
 
         this.main = main;
         this.chat = main.getChat();
@@ -85,7 +85,7 @@ public abstract class RoundInterface {
         return status;
     }
 
-    protected boolean changeStatusTo(Status status) {
+    private boolean changeStatusTo(Status status) {
         if (this.status == Status.GAME_HAS_FINISHED ||
                 this.status == status)
             return false;

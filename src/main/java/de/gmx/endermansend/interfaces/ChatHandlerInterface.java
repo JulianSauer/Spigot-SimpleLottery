@@ -17,7 +17,7 @@ public abstract class ChatHandlerInterface {
 
     protected HashMap<String, String> messages;
 
-    public ChatHandlerInterface(ConfigHandlerInterface config) {
+    protected ChatHandlerInterface(ConfigHandlerInterface config) {
         messages = config.getMessages();
     }
 
@@ -29,7 +29,7 @@ public abstract class ChatHandlerInterface {
         Bukkit.broadcastMessage(listTag + " " + msg);
     }
 
-    public void sendMessage(CommandSender receiver, String msg) {
+    protected void sendMessage(CommandSender receiver, String msg) {
         receiver.sendMessage(pluginTag + " " + msg);
     }
 

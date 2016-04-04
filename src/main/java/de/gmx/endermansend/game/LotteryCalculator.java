@@ -28,12 +28,7 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
     }
 
     public boolean setRange(int range[]) {
-
-        if (range.length != 2)
-            return false;
-
-        return setRange(range[0], range[1]);
-
+        return range.length == 2 && setRange(range[0], range[1]);
     }
 
     public boolean setRange(int min, int max) {

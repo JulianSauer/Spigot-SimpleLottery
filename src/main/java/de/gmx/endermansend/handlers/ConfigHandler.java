@@ -15,12 +15,12 @@ public class ConfigHandler extends ConfigHandlerInterface {
         super(plugin);
     }
 
-    public boolean getAutomodeEnabled() {
-        return getBooleanFromConfig("automode.enabled");
+    public boolean getAutoModeEnabled() {
+        return getBooleanFromConfig("autoMode.enabled");
     }
 
-    public int getAutomodeInterval() {
-        return getIntFromConfig("automode.interval");
+    public int getAutoModeInterval() {
+        return getIntFromConfig("autoMode.interval");
     }
 
     public int getRoundDuration() {

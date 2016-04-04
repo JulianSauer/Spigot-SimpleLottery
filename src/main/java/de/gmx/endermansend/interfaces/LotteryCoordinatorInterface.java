@@ -23,7 +23,7 @@ public abstract class LotteryCoordinatorInterface {
 
     private ChatHandlerInterface chat;
 
-    public LotteryCoordinatorInterface(SimpleLottery main) {
+    protected LotteryCoordinatorInterface(SimpleLottery main) {
         this.main = main;
         this.config = main.getConfigHandler();
         this.calc = main.getCalc();

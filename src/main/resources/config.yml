@@ -1,4 +1,4 @@
-automode:
+autoMode:
   enabled: true
   interval: 60
 round:
