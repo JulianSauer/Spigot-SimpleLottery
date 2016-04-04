@@ -103,4 +103,8 @@ public class ChatHandler extends ChatHandlerInterface {
             sendListEntry(sender, ticket.getOwner() + ": " + ticket.getTicketNumber());
     }
 
+    public void sendRewardError(Player receiver) {
+        sendErrorMessage(receiver, messages.get("ticket.rewardFailure"));
+    }
+
 }

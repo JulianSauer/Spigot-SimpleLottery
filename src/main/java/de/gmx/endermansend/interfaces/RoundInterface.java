@@ -1,13 +1,21 @@
 package de.gmx.endermansend.interfaces;
 
 import de.gmx.endermansend.game.Ticket;
+import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 
 public abstract class RoundInterface {
 
     protected Collection<Ticket> tickets;
+
+    protected SimpleLottery main;
+
+    protected ChatHandlerInterface chat;
+
+    protected int multiplier = 0;
 
     public enum Status {
         GAME_IS_RUNNING,
@@ -18,9 +26,15 @@ public abstract class RoundInterface {
     protected int roundNumber;
     protected Status status;
 
-    public RoundInterface(int roundNumber) {
+    public RoundInterface(SimpleLottery main, int roundNumber) {
+
+        this.main = main;
+        this.chat = main.getChat();
+        this.multiplier = main.getConfigHandler().getRoundMultiplier();
+
         this.roundNumber = roundNumber;
         status = Status.GAME_IS_RUNNING;
+
     }
 
     public boolean resumeGame() {
@@ -35,7 +49,7 @@ public abstract class RoundInterface {
         return changeStatusTo(Status.GAME_HAS_FINISHED);
     }
 
-    public abstract boolean addLotteryEntry(Player player, int ticketNumber);
+    public abstract boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet);
 
     /**
      * Finishes the round and returns the owners of tickets with matching ticketNumbers
@@ -56,7 +70,16 @@ public abstract class RoundInterface {
 
     public abstract Collection<Integer> getTicketsOf(Player player);
 
+    public abstract Collection<Ticket> getWinningTickets(int winningNumber);
+
     public abstract Collection<String> getOwnersOf(int ticketNumber);
+
+    /**
+     * Gives the reward to players who have the winning number
+     *
+     * @return Names of the winners
+     */
+    public abstract Collection<String> handOutRewards(int winningNumber);
 
     public Status getStatus() {
         return status;

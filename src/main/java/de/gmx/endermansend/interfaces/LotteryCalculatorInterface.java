@@ -1,10 +1,8 @@
 package de.gmx.endermansend.interfaces;
 
-import de.gmx.endermansend.game.Ticket;
-
 public interface LotteryCalculatorInterface {
 
-    Ticket getWinnerTicket();
+    int getWinningNumber();
 
     int[] getRange();
 

@@ -4,6 +4,7 @@ import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.main.SimpleLottery;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Paths for config.yml values
@@ -30,6 +31,10 @@ public class ConfigHandler extends ConfigHandlerInterface {
         return getIntFromConfig("round.multiplier");
     }
 
+    public List<String> getAllowedMaterials() {
+        return getListFromConfig("allowedBlocks");
+    }
+
     public HashMap<String, String> getMessages() {
 
         HashMap<String, String> messages = new HashMap<String, String>();
@@ -44,6 +49,7 @@ public class ConfigHandler extends ConfigHandlerInterface {
         messages.put("round.noWinners", getStringFromConfig("messages.round.noWinners"));
         messages.put("ticket.bought", getStringFromConfig("messages.ticket.bought"));
         messages.put("ticket.failure", getStringFromConfig("messages.ticket.failure"));
+        messages.put("ticket.rewardFailure", getStringFromConfig("messages.ticket.rewardFailure"));
 
         return messages;
 

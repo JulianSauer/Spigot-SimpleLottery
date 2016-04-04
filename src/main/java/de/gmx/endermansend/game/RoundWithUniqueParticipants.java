@@ -1,11 +1,13 @@
 package de.gmx.endermansend.game;
 
+import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class RoundWithUniqueParticipants extends RoundWithDefaultSettings {
 
-    public RoundWithUniqueParticipants(int roundNumber) {
-        super(roundNumber);
+    public RoundWithUniqueParticipants(SimpleLottery main, int roundNumber) {
+        super(main, roundNumber);
     }
 
     /**
@@ -13,16 +15,17 @@ public class RoundWithUniqueParticipants extends RoundWithDefaultSettings {
      *
      * @param player       Initiator of the lottery entry
      * @param ticketNumber Lottery number the player chose
+     * @param bet          Bet the player has made
      * @return true if entry could be added
      */
-    public boolean addLotteryEntry(Player player, int ticketNumber) {
+    public boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet) {
 
         for (Ticket t : tickets) {
-            if (t.getOwner().equalsIgnoreCase(player.getName()))
+            if (t.getOwner().equals(player))
                 return false;
         }
 
-        return super.addLotteryEntry(player, ticketNumber);
+        return super.addLotteryEntry(player, ticketNumber, bet);
 
     }
 

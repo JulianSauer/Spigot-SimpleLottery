@@ -19,10 +19,8 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
         setRange(min, max);
     }
 
-    public Ticket getWinnerTicket() {
-        int winnerNumber = range[0] + (int) (Math.random() * ((range[1] - range[0]) + 1));
-        Ticket winnerTicket = new Ticket(winnerNumber);
-        return winnerTicket;
+    public int getWinningNumber() {
+        return range[0] + (int) (Math.random() * ((range[1] - range[0]) + 1));
     }
 
     public int[] getRange() {

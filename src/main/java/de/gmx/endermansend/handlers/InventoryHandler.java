@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryHandler {
 
@@ -25,6 +26,32 @@ public class InventoryHandler {
         }
         player.getInventory().addItem(createTicketItem(ticket, roundNumber));
         return true;
+
+    }
+
+    public static boolean giveRewardToPlayer(Player player, List<ItemStack> rewards) {
+
+        for (ItemStack reward : rewards) {
+            if (player.getInventory().firstEmpty() != -1) {
+                player.getInventory().addItem(reward);
+            } else {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public static ItemStack getBetFromPlayer(String material, int amount, List<String> allowedMaterials) {
+
+        ItemStack bet = null;
+        for (String allowedMaterial : allowedMaterials) {
+            if (allowedMaterial.equalsIgnoreCase(material)) {
+                bet = new ItemStack(Material.getMaterial(material.toUpperCase()), amount);
+                break;
+            }
+        }
+        return bet;
 
     }
 

@@ -61,4 +61,6 @@ public abstract class ChatHandlerInterface {
 
     public abstract void sendBoughtTickets(CommandSender sender, RoundInterface round);
 
+    public abstract void sendRewardError(Player receiver);
+
 }

@@ -4,6 +4,12 @@ automode:
 round:
   duration: 5
   multiplier: 10
+# List of allowed blocks can be found under:
+# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+allowedBlocks:
+  - "diamond"
+  - "gold_nugget"
+  - "gold_ingot"
 messages:
   round:
     start: "Round #<<roundNumber>> started!"
@@ -19,3 +25,4 @@ messages:
   ticket:
     bought: "You succesfully bought a ticket. Your ticket number is <<ticketNumber>>!"
     failure: "Couldn't buy ticket with ticket number <<ticketNumber>>"
+    rewardFailure: "Could not give you your reward. Is your inventory full?"

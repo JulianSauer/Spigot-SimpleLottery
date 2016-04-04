@@ -66,6 +66,8 @@ public abstract class ConfigHandlerInterface {
 
     public abstract int getRoundMultiplier();
 
+    public abstract List<String> getAllowedMaterials();
+
     public abstract HashMap<String, String> getMessages();
 
     protected boolean getBooleanFromConfig(String path) {
@@ -92,15 +94,23 @@ public abstract class ConfigHandlerInterface {
         return config.getString(path);
     }
 
-    protected List getListFromConfig(String path) {
+    protected List<String> getListFromConfig(String path) {
+        List<String> list = config.getStringList(path);
         if (!config.isSet(path) || !config.isList(path))
-            noValueFound(path);
-        return config.getList(path);
+            noListFound(path);
+        else if (list.isEmpty())
+            noListFound(path);
+        return list;
     }
 
     protected void noValueFound(String value) {
-        logger.warning("Value is missing or wrong type: " + value);
+        logger.warning("Value is missing or of wrong type: " + value);
         logger.warning("Using default value");
+        logger.warning("Delete config.yml to get a default one");
+    }
+
+    protected void noListFound(String path) {
+        logger.warning("Could not find list in config.yml: " + path);
         logger.warning("Delete config.yml to get a default one");
     }
 

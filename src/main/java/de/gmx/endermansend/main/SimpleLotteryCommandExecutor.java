@@ -1,20 +1,25 @@
 package de.gmx.endermansend.main;
 
 import de.gmx.endermansend.handlers.ChatHandler;
+import de.gmx.endermansend.handlers.InventoryHandler;
+import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
-    LotteryCoordinatorInterface lottery;
-    ChatHandler chat;
+    private LotteryCoordinatorInterface lottery;
+    private ChatHandler chat;
+    private ConfigHandlerInterface config;
 
     public SimpleLotteryCommandExecutor(SimpleLottery main) {
         this.lottery = main.getLottery();
         this.chat = main.getChat();
+        this.config = main.getConfigHandler();
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -32,11 +37,14 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
             } else if (args.length == 2) {
 
-                if (args[0].equalsIgnoreCase("buy"))
-                    return buyTicket(sender, args);
-                else if (args[0].equalsIgnoreCase("list"))
+                if (args[0].equalsIgnoreCase("list"))
                     if (args[1].equalsIgnoreCase("public"))
                         listTicketsPublic(sender);
+
+            } else if (args.length == 4) {
+
+                if (args[0].equalsIgnoreCase("buy"))
+                    return buyTicket(sender, args);
 
             }
 
@@ -85,7 +93,9 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
             if (sender.hasPermission("SimpleLottery.Round.BuyTickets")) {
                 Player player = (Player) sender;
                 int ticketNumber = Integer.parseInt(args[1]);
-                lottery.addPlayer(player, ticketNumber);
+                String material = args[2];
+                int amount = Integer.parseInt(args[3]);
+                lottery.addPlayer(player, ticketNumber, material, amount);
             } else
                 chat.sendPermissionError(sender);
 

@@ -2,7 +2,9 @@ package de.gmx.endermansend.game;
 
 import de.gmx.endermansend.handlers.InventoryHandler;
 import de.gmx.endermansend.interfaces.RoundInterface;
+import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,8 +12,8 @@ import java.util.List;
 
 public class RoundWithDefaultSettings extends RoundInterface {
 
-    public RoundWithDefaultSettings(int roundNumber) {
-        super(roundNumber);
+    public RoundWithDefaultSettings(SimpleLottery main, int roundNumber) {
+        super(main, roundNumber);
         tickets = new ArrayList<Ticket>();
     }
 
@@ -20,12 +22,12 @@ public class RoundWithDefaultSettings extends RoundInterface {
      *
      * @param player       Initiator of the lottery entry
      * @param ticketNumber Lottery number the player chose
+     * @param bet          Bet the player has made
      * @return true if entry could be added
      */
-    public boolean addLotteryEntry(Player player, int ticketNumber) {
+    public boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet) {
 
-        String playerName = player.getName();
-        Ticket ticket = new Ticket(playerName, ticketNumber);
+        Ticket ticket = new Ticket(player, ticketNumber, bet);
 
         if (tickets.contains(ticket))
             return false;
@@ -43,13 +45,12 @@ public class RoundWithDefaultSettings extends RoundInterface {
 
     public Collection<Integer> getTicketsOf(Player player) {
 
-        String playerName = player.getName();
         List<Integer> playerTickets = new ArrayList<Integer>();
 
-        String owner;
+        Player owner;
         for (Ticket t : tickets) {
             owner = t.getOwner();
-            if (owner.equalsIgnoreCase(playerName))
+            if (owner.equals(player))
                 playerTickets.add(t.getTicketNumber());
         }
 
@@ -63,10 +64,38 @@ public class RoundWithDefaultSettings extends RoundInterface {
 
         for (Ticket t : tickets) {
             if (ticketNumber == t.getTicketNumber())
-                owners.add(t.getOwner());
+                owners.add(t.getOwner().getName());
         }
 
         return owners;
+
+    }
+
+    public Collection<Ticket> getWinningTickets(int winningNumber) {
+
+        List<Ticket> winningTickets = new ArrayList<Ticket>();
+
+        for (Ticket t : tickets) {
+            if (winningNumber == t.getTicketNumber())
+                winningTickets.add(t);
+        }
+        return winningTickets;
+
+    }
+
+    public Collection<String> handOutRewards(int winningNumber) {
+
+        Collection<Ticket> winningTickets = getWinningTickets(winningNumber);
+        Collection<String> winners = new ArrayList<String>();
+
+        for (Ticket t : winningTickets) {
+            Player player = t.getOwner();
+            winners.add(player.getName());
+            if (!(InventoryHandler.giveRewardToPlayer(player, t.getReward(multiplier))))
+                chat.sendRewardError(player);
+        }
+
+        return winners;
 
     }
 

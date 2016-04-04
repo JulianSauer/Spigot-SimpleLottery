@@ -1,27 +1,58 @@
 package de.gmx.endermansend.game;
 
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ticket {
 
     private int ticketNumber;
 
-    private String owner;
+    private Player owner;
 
-    public Ticket(int ticketNumber) {
-        this.ticketNumber = ticketNumber;
-        owner = null;
-    }
+    private ItemStack bet;
 
-    public Ticket(String owner, int ticketNumber) {
+    public Ticket(Player owner, int ticketNumber, ItemStack bet) {
         this.owner = owner;
         this.ticketNumber = ticketNumber;
+        this.bet = bet;
     }
 
     public int getTicketNumber() {
         return ticketNumber;
     }
 
-    public String getOwner() {
+    public Player getOwner() {
         return owner;
+    }
+
+    public ItemStack getBet() {
+        return bet;
+    }
+
+    public List<ItemStack> getReward(int multiplier) {
+
+        int reward = bet.getAmount() * multiplier;
+        int max = bet.getMaxStackSize();
+
+        List<ItemStack> rewardItems = new ArrayList<ItemStack>();
+
+        while (true) {
+
+            if (reward <= max) {
+                rewardItems.add(new ItemStack(bet.getType(), reward));
+                break;
+            } else {
+                rewardItems.add(new ItemStack(bet.getType(), max));
+                reward -= max;
+            }
+
+        }
+
+        return rewardItems;
+
     }
 
     @Override
@@ -29,7 +60,7 @@ public class Ticket {
 
         if (o instanceof Ticket) {
             Ticket t = (Ticket) o;
-            if (this.owner.equalsIgnoreCase(t.owner))
+            if (this.owner.equals(t))
                 return this.ticketNumber == t.ticketNumber;
         }
 
