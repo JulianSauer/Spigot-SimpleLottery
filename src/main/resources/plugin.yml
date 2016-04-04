@@ -4,5 +4,27 @@ author: EndermansEnd
 main: de.gmx.endermansend.main.SimpleLottery
 commands:
   lottery:
-    description: Currently a test command
-    usage: /lottery
+    description: Command for SimpleLottery
+    usage: /lottery <arguments>
+permissions:
+  SimpleLottery.*:
+    description: Gives you access to all SimpleLottery commands
+    Children:
+      SimpleLottery.Control: op
+      SimpleLottery.Round: true
+      SimpleLottery.Round.BuyTickets: true
+      SimpleLottery.Round.ListTickets: op
+      SimpleLottery.Round.ListTickets.Private: op
+      SimpleLottery.Round.ListTickets.public: op
+  SimpleLottery.Control:
+    description: Allows you to start, stop and pause a game
+  SimpleLottery.Round.*:
+    description: Allows you to buy tickets, list bought tickets
+  SimpleLottery.Round.BuyTickets:
+    description: Allows you to participate in a round by buying a ticket
+  SimpleLottery.Round.ListTickets.*:
+    description: Allows you to print all bought tickets of the current round
+  SimpleLottery.Round.ListTickets.Private:
+    description: Shows you all bought tickets
+  SimpleLottery.Round.ListTickets.Public:
+    description: Shows everybody the bought tickets

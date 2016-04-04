@@ -60,13 +60,21 @@ public abstract class LotteryCoordinatorInterface {
 
     }
 
-    public void listTickets(CommandSender sender) {
+    public void listTicketsPublic(CommandSender sender) {
 
         if (round == null) {
             chat.sendErrorMessage(sender, "No round was started yet!");
             return;
         }
-        chat.broadcastPlayersOfRound(round);
+        chat.broadcastBoughtTickets(round);
+    }
+
+    public void listTicketsPrivate(CommandSender sender) {
+        if (round == null) {
+            chat.sendErrorMessage(sender, "No round was started yet!");
+            return;
+        }
+        chat.sendBoughtTickets(sender, round);
     }
 
 }

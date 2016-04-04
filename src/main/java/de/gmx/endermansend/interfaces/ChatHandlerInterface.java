@@ -25,7 +25,7 @@ public abstract class ChatHandlerInterface {
         Bukkit.broadcastMessage(pluginTag + " " + msg);
     }
 
-    protected void broadcastUntaggedMessage(String msg) {
+    protected void broadcastListEntry(String msg) {
         Bukkit.broadcastMessage(listTag + " " + msg);
     }
 
@@ -37,6 +37,10 @@ public abstract class ChatHandlerInterface {
         receiver.sendMessage(errorTag + " " + msg);
     }
 
+    public void sendListEntry(CommandSender receiver, String msg) {
+        receiver.sendMessage(listTag + " " + msg);
+    }
+
     public abstract void broadcastRoundStart(int roundNumber);
 
     public abstract void broadcastRoundEnd(int roundNumber);
@@ -45,10 +49,16 @@ public abstract class ChatHandlerInterface {
 
     public abstract void broadcastWinners(int roundNumber, int winningNumber, Collection<String> winners);
 
-    public abstract void broadcastPlayersOfRound(RoundInterface round);
+    public abstract void broadcastBoughtTickets(RoundInterface round);
+
+    public abstract void sendHaveToBePlayerError(CommandSender sender);
+
+    public abstract void sendPermissionError(CommandSender sender);
 
     public abstract void sendTicketBought(Player receiver, int ticketNumber);
 
     public abstract void sendTicketFailure(Player receiver, int ticketNumber);
+
+    public abstract void sendBoughtTickets(CommandSender sender, RoundInterface round);
 
 }

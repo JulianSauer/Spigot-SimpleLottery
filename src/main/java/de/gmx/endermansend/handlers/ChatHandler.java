@@ -5,6 +5,7 @@ import de.gmx.endermansend.interfaces.ChatHandlerInterface;
 import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.interfaces.RoundInterface;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class ChatHandler extends ChatHandlerInterface {
 
         pluginTag = ChatColor.GOLD + "[Simple Lottery]" + ChatColor.RESET;
         errorTag = ChatColor.RED + "[Simple Lottery]" + ChatColor.RESET;
-        listTag = "                     - ";
+        listTag = "                     -";
 
     }
 
@@ -59,7 +60,7 @@ public class ChatHandler extends ChatHandlerInterface {
             } else {
                 broadcastMessage(messages.get("round.winners"));
                 for (String player : winners)
-                    broadcastUntaggedMessage(player);
+                    broadcastListEntry(player);
             }
         } else {
             broadcastMessage(messages.get("round.noWinners"));
@@ -67,12 +68,24 @@ public class ChatHandler extends ChatHandlerInterface {
 
     }
 
-    public void broadcastPlayersOfRound(RoundInterface round) {
+    public void broadcastBoughtTickets(RoundInterface round) {
 
         ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
         broadcastMessage("Bought tickets:");
         for (Ticket ticket : tickets)
-            broadcastUntaggedMessage(ticket.getOwner() + ": " + ticket.getTicketNumber());
+            broadcastListEntry(ticket.getOwner() + ": " + ticket.getTicketNumber());
+    }
+
+    public void sendListEntry(CommandSender sender, String msg) {
+
+    }
+
+    public void sendHaveToBePlayerError(CommandSender sender) {
+        sendErrorMessage(sender, "Only players can perform this command.");
+    }
+
+    public void sendPermissionError(CommandSender sender) {
+        sendErrorMessage(sender, "You do not have permission to perform this command.");
     }
 
     public void sendTicketBought(Player receiver, int ticketNumber) {
@@ -81,6 +94,13 @@ public class ChatHandler extends ChatHandlerInterface {
 
     public void sendTicketFailure(Player receiver, int ticketNumber) {
         sendMessage(receiver, messages.get("ticket.failure").replace("<<ticketNumber>>", "" + ticketNumber));
+    }
+
+    public void sendBoughtTickets(CommandSender sender, RoundInterface round) {
+        ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
+        sendMessage(sender, "Bought tickets:");
+        for (Ticket ticket : tickets)
+            sendListEntry(sender, ticket.getOwner() + ": " + ticket.getTicketNumber());
     }
 
 }

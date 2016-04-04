@@ -2,6 +2,7 @@ package de.gmx.endermansend.main;
 
 import de.gmx.endermansend.game.LotteryCalculator;
 import de.gmx.endermansend.game.LotteryCoordinatorAuto;
+import de.gmx.endermansend.handlers.ChatHandler;
 import de.gmx.endermansend.handlers.ConfigHandler;
 import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
@@ -16,15 +17,18 @@ public class SimpleLottery extends JavaPlugin {
 
     private Logger logger;
     private ConfigHandlerInterface config;
-    LotteryCoordinatorInterface lottery;
+    private LotteryCoordinatorInterface lottery;
+    private ChatHandler chat;
 
     @Override
     public void onEnable() {
 
         this.logger = getLogger();
         this.config = new ConfigHandler(this);
+        this.chat = new ChatHandler(config);
 
         lottery = new LotteryCoordinatorAuto(config, new LotteryCalculator(1, 10));
+        this.getCommand("lottery").setExecutor(new SimpleLotteryCommandExecutor(lottery, chat));
 
         logger.info("SimpleLottery enabled");
 
@@ -33,41 +37,6 @@ public class SimpleLottery extends JavaPlugin {
     @Override
     public void onDisable() {
         System.out.println("SimpleLottery disabled");
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-
-        if (cmd.getName().equalsIgnoreCase("lottery")) {
-
-            if (args.length == 1) {
-
-                if (args[0].equalsIgnoreCase("start")) {
-                    lottery.startNewGame(sender);
-                    return true;
-                } else if (args[0].equalsIgnoreCase("stop")) {
-                    lottery.finishGame(sender);
-                    return true;
-                } else if (args[0].equalsIgnoreCase("list")) {
-                    lottery.listTickets(sender);
-                    return true;
-                }
-
-            } else if (args.length == 2) {
-
-                if (args[0].equalsIgnoreCase("buyTicket") && sender instanceof Player) {
-                    Player player = (Player) sender;
-                    int ticketNumber = Integer.parseInt(args[1]);
-                    lottery.addPlayer(player, ticketNumber);
-                    return true;
-                }
-
-            }
-
-        }
-
-        return false;
-
     }
 
 }
