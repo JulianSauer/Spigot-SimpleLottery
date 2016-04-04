@@ -2,6 +2,9 @@ package de.gmx.endermansend.game;
 
 import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
 
+/**
+ * Implements the calculation methods for determining a winner.
+ */
 public class LotteryCalculator implements LotteryCalculatorInterface {
 
     private int[] range;
@@ -19,6 +22,9 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
         setRange(min, max);
     }
 
+    /**
+     * @return A winning number based on the given range
+     */
     public int getWinningNumber() {
         return range[0] + (int) (Math.random() * ((range[1] - range[0]) + 1));
     }
@@ -27,10 +33,23 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
         return new int[0];
     }
 
+    /**
+     * Sets the range for the lottery numbers. Takes care that the value for max is bigger than min.
+     *
+     * @param range Has to be an array with the following pattern: {min, max}
+     * @return False if the range is too long/short or the values in it are pointless
+     */
     public boolean setRange(int range[]) {
         return range.length == 2 && setRange(range[0], range[1]);
     }
 
+    /**
+     * Sets the range for the lottery numbers. Takes care that the value for max is bigger than min.
+     *
+     * @param min Smaller value for the range
+     * @param max Bigger value for the range
+     * @return false if the values are pointless
+     */
     public boolean setRange(int min, int max) {
 
         if (max <= min ||

@@ -9,6 +9,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 
+/**
+ * Executes the necessary steps to realise commands from CommandExecutor.
+ */
 public abstract class LotteryCoordinatorInterface {
 
     private int roundNumber = 0;
@@ -30,6 +33,11 @@ public abstract class LotteryCoordinatorInterface {
         this.chat = main.getChat();
     }
 
+    /**
+     * Starts a new round if the last round has finished (or doesn't exist).
+     *
+     * @param sender Needed to inform initiator about mistakes
+     */
     public void startNewGame(CommandSender sender) {
 
         if (round != null) {
@@ -43,6 +51,11 @@ public abstract class LotteryCoordinatorInterface {
 
     }
 
+    /**
+     * Finishes the current round if it is not already finished.
+     *
+     * @param sender Needed to inform initiator about mistakes
+     */
     public void finishGame(CommandSender sender) {
 
         Collection<String> winners;
@@ -58,6 +71,14 @@ public abstract class LotteryCoordinatorInterface {
 
     }
 
+    /**
+     * Creates a new ticket for a player from the given information.
+     *
+     * @param player       Player who tries to participate
+     * @param ticketNumber Player's desired ticket number
+     * @param material     Player's desired material for the bet
+     * @param amount       Player's desired amount of bet items
+     */
     public void addPlayer(Player player, int ticketNumber, String material, int amount) {
 
         ItemStack bet = InventoryHandler.getBetFromPlayer(material, amount, config.getAllowedMaterials());
@@ -74,6 +95,11 @@ public abstract class LotteryCoordinatorInterface {
 
     }
 
+    /**
+     * Passes the request to list all bought tickets on to a ChatHandler if the round status allows it.
+     *
+     * @param sender Needed to inform initiator about mistakes
+     */
     public void listTicketsPublic(CommandSender sender) {
 
         if (round == null) {
@@ -83,6 +109,11 @@ public abstract class LotteryCoordinatorInterface {
         chat.broadcastBoughtTickets(round);
     }
 
+    /**
+     * Passes the request to list all bought tickets on to a ChatHandler if the round status allows it.
+     *
+     * @param sender Needed to inform initiator about mistakes
+     */
     public void listTicketsPrivate(CommandSender sender) {
         if (round == null) {
             chat.sendErrorMessage(sender, "No round was started yet!");

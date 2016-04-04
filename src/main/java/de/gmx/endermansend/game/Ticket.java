@@ -6,6 +6,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a basic lottery ticket and can be used to store the number, owner and bet of a ticket as well as
+ * calculate the reward if the owner won with this number.
+ */
 public class Ticket {
 
     private int ticketNumber;
@@ -32,6 +36,13 @@ public class Ticket {
         return bet;
     }
 
+    /**
+     * Calculates the reward the winner of this ticket receives based on the item type and amount of their bet as well
+     * as the multiplier of the current round.
+     *
+     * @param multiplier Can be changed in config.yml
+     * @return List of items for the winner to receive
+     */
     public List<ItemStack> getReward(int multiplier) {
 
         int reward = bet.getAmount() * multiplier;

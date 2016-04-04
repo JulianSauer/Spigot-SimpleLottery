@@ -9,10 +9,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles access to the inventory of players. Useful for giving ticket (paper) items and rewards to players as well as
+ * getting bet items from them.
+ */
 public class InventoryHandler {
 
     /**
-     * Gives a paper item to the player
+     * Gives a paper item to the player.
      *
      * @param player      Ticket buyer
      * @param ticket      Metadata for the paper
@@ -29,6 +33,13 @@ public class InventoryHandler {
 
     }
 
+    /**
+     * Gives a player items as a reward for winning.
+     *
+     * @param player  Player who will receive the rewards
+     * @param rewards Items that the player has won
+     * @return False when there's no more space in the player's inventory
+     */
     public static boolean giveRewardToPlayer(Player player, List<ItemStack> rewards) {
 
         for (ItemStack reward : rewards) {
@@ -42,6 +53,16 @@ public class InventoryHandler {
 
     }
 
+    /**
+     * Parses a material name and amount to an ItemStack.
+     * The material is validated via the values in config.yml
+     * found under allowedBlocks.
+     *
+     * @param material         Material name; has to match org.bukkit.Material
+     * @param amount           Amount of items payed
+     * @param allowedMaterials List of allowed materials from config.yml
+     * @return Null if material is not allowed/found in config.yml
+     */
     public static ItemStack getBetFromPlayer(String material, int amount, List<String> allowedMaterials) {
 
         ItemStack bet = null;
@@ -55,6 +76,13 @@ public class InventoryHandler {
 
     }
 
+    /**
+     * Creates a paper item that can be given to a player.
+     *
+     * @param ticket      Ticket that the paper item will represents
+     * @param roundNumber Round number of this ticket
+     * @return Paper item
+     */
     private static ItemStack createTicketItem(Ticket ticket, int roundNumber) {
 
         ItemStack ticketItem = new ItemStack(Material.PAPER, 1);

@@ -1,5 +1,8 @@
 package de.gmx.endermansend.interfaces;
 
+/**
+ * Calculates a winning number based on the given range.
+ */
 public interface LotteryCalculatorInterface {
 
     int getWinningNumber();

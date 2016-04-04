@@ -7,6 +7,10 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 import java.util.HashMap;
 
+// TODO: Reduce uses of logger
+/**
+ * Should be used for chat interaction to keep message formatting consistent.
+ */
 public abstract class ChatHandlerInterface {
 
     protected String pluginTag;
@@ -17,6 +21,7 @@ public abstract class ChatHandlerInterface {
 
     protected HashMap<String, String> messages;
 
+    // TODO: Replace ConfigHandlerInterface with SimpleLottery
     protected ChatHandlerInterface(ConfigHandlerInterface config) {
         messages = config.getMessages();
     }

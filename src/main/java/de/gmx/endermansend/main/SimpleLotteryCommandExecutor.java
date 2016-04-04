@@ -7,6 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+/**
+ * Evaluates /lottery commands
+ */
 public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
     private LotteryCoordinatorInterface lottery;
@@ -29,6 +32,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                     return stop(sender);
                 else if (args[0].equalsIgnoreCase("list"))
                     return listTicketsPrivate(sender);
+                // TODO: Add command to pause the game
 
             } else if (args.length == 2) {
 
@@ -48,6 +52,13 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         return false;
     }
 
+    /**
+     * Tries to start a new round.
+     * Requires permission 'Control'
+     *
+     * @param sender Initiator of the command
+     * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
+     */
     private boolean start(CommandSender sender) {
         if (sender.hasPermission("SimpleLottery.Control")) {
             lottery.startNewGame(sender);
@@ -57,6 +68,13 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         return true;
     }
 
+    /**
+     * Tries to stop the current round.
+     * Requires permission 'Control'
+     *
+     * @param sender Initiator of the command
+     * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
+     */
     private boolean stop(CommandSender sender) {
         if (sender.hasPermission("SimpleLottery.Control"))
             lottery.finishGame(sender);
@@ -65,6 +83,13 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         return true;
     }
 
+    /**
+     * Sends a list of bought tickets with player names and ticket numbers to initiator.
+     * Requires permission 'Round.ListTickets.Private'
+     *
+     * @param sender Initiator of the command
+     * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
+     */
     private boolean listTicketsPrivate(CommandSender sender) {
         if (sender.hasPermission("SimpleLottery.Round.ListTickets.Private"))
             lottery.listTicketsPrivate(sender);
@@ -73,6 +98,13 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         return true;
     }
 
+    /**
+     * Broadcasts a list of bought tickets with player names and ticket numbers.
+     * Requires permission 'Round.ListTickets.Public'
+     *
+     * @param sender Initiator of the command
+     * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
+     */
     private boolean listTicketsPublic(CommandSender sender) {
         if (sender.hasPermission("SimpleLottery.Round.ListTickets.Public"))
             lottery.listTicketsPublic(sender);
@@ -81,6 +113,14 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         return true;
     }
 
+    /**
+     * Lets the sender buy a ticket.
+     * Requires permission 'Round.BuyTickets'
+     *
+     * @param sender Initiator will receive an error if he/she isn't a player
+     * @param args   {"buy", "<ticketNumber>", "<material>", "<amount>"}
+     * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
+     */
     private boolean buyTicket(CommandSender sender, String[] args) {
 
         if (sender instanceof Player) {

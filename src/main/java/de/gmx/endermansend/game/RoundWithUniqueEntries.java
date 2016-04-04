@@ -11,13 +11,14 @@ public class RoundWithUniqueEntries extends RoundWithDefaultSettings {
     }
 
     /**
-     * Allows only one entry per player and ticketNumber
+     * Allows only one entry per player and ticketNumber per round.
      *
      * @param player       Initiator of the lottery entry
      * @param ticketNumber Lottery number the player chose
      * @param bet          Bet the player has made
      * @return true if entry could be added
      */
+    @Override
     public boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet) {
 
         for (Ticket t : tickets) {

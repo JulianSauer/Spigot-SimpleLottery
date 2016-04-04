@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Represents a round in the lottery where multiple players can bet on the same number as well as have multiple tickets.
+ */
 public class RoundWithDefaultSettings extends RoundInterface {
 
     public RoundWithDefaultSettings(SimpleLottery main, int roundNumber) {
@@ -18,12 +21,12 @@ public class RoundWithDefaultSettings extends RoundInterface {
     }
 
     /**
-     * Adds a new ticket to the round if it doesn't exist yet
+     * Adds a new ticket to the round if player or ticketNumber are different from the already existing tickets.
      *
      * @param player       Initiator of the lottery entry
      * @param ticketNumber Lottery number the player chose
      * @param bet          Bet the player has made
-     * @return true if entry could be added
+     * @return True if entry could be added
      */
     public boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet) {
 
@@ -43,6 +46,10 @@ public class RoundWithDefaultSettings extends RoundInterface {
         return tickets;
     }
 
+    /**
+     * @param player Object who's tickets are asked for
+     * @return All ticketNumbers of a player
+     */
     public Collection<Integer> getTicketsOf(Player player) {
 
         List<Integer> playerTickets = new ArrayList<Integer>();
@@ -58,6 +65,12 @@ public class RoundWithDefaultSettings extends RoundInterface {
 
     }
 
+    /**
+     * Finds all players who have the specified ticket number.
+     *
+     * @param ticketNumber Number that will be searched for
+     * @return All players who have a ticket with the specified ticketNumber in the current round
+     */
     public Collection<String> getOwnersOf(int ticketNumber) {
 
         List<String> owners = new ArrayList<String>();
@@ -71,6 +84,10 @@ public class RoundWithDefaultSettings extends RoundInterface {
 
     }
 
+    /**
+     * @param winningNumber Representing the number that won the round
+     * @return Returns a collection of the tickets that won
+     */
     public Collection<Ticket> getWinningTickets(int winningNumber) {
 
         List<Ticket> winningTickets = new ArrayList<Ticket>();
@@ -83,6 +100,13 @@ public class RoundWithDefaultSettings extends RoundInterface {
 
     }
 
+    /**
+     * Gives the owners of tickets with the winning number their reward via InventoryHandler and returns a collection
+     * of Strings of those players.
+     *
+     * @param winningNumber
+     * @return
+     */
     public Collection<String> handOutRewards(int winningNumber) {
 
         Collection<Ticket> winningTickets = getWinningTickets(winningNumber);

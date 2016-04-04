@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Implements the messages that are displayed via the ChatHandlerInterface. Therefore messages from config.yml are used.
+ */
 public class ChatHandler extends ChatHandlerInterface {
 
     public ChatHandler(ConfigHandlerInterface config) {
@@ -31,6 +34,11 @@ public class ChatHandler extends ChatHandlerInterface {
         broadcastMessage(messages.get("round.end").replace("<<roundNumber>>", "" + roundNumber));
     }
 
+    /**
+     * Displays the status of a round object.
+     *
+     * @param round Interface of the round object which's status should be displayed
+     */
     public void broadcastStatus(RoundInterface round) {
 
         String statusText;
@@ -48,6 +56,14 @@ public class ChatHandler extends ChatHandlerInterface {
 
     }
 
+    /**
+     * Displays the winning number as well as every player that has bought a ticket in the round with that number. If
+     * nobody won, an alternative message will be displayed instead.
+     *
+     * @param roundNumber   Number of the finished round
+     * @param winningNumber Number that won the lottery
+     * @param winners       Collection of winners
+     */
     public void broadcastWinners(int roundNumber, int winningNumber, Collection<String> winners) {
 
         broadcastRoundEnd(roundNumber);
@@ -68,6 +84,11 @@ public class ChatHandler extends ChatHandlerInterface {
 
     }
 
+    /**
+     * Displays all players, that bought tickets as well as their numbers.
+     *
+     * @param round Round object containing the ticket list
+     */
     public void broadcastBoughtTickets(RoundInterface round) {
 
         ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
@@ -77,7 +98,7 @@ public class ChatHandler extends ChatHandlerInterface {
     }
 
     public void sendListEntry(CommandSender sender, String msg) {
-
+        // TODO: idk why there's no implementation here
     }
 
     public void sendHaveToBePlayerError(CommandSender sender) {
@@ -96,6 +117,12 @@ public class ChatHandler extends ChatHandlerInterface {
         sendMessage(receiver, messages.get("ticket.failure").replace("<<ticketNumber>>", "" + ticketNumber));
     }
 
+    /**
+     * Shows the sender all players, that bought tickets as well as their numbers.
+     *
+     * @param sender Initiator of the command
+     * @param round  Round object containing the ticket list
+     */
     public void sendBoughtTickets(CommandSender sender, RoundInterface round) {
         ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
         sendMessage(sender, "Bought tickets:");

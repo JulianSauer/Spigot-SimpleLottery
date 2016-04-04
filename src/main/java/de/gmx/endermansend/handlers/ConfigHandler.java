@@ -6,8 +6,9 @@ import de.gmx.endermansend.main.SimpleLottery;
 import java.util.HashMap;
 import java.util.List;
 
+// TODO: Getter methods should be declared here rather than in the interface
 /**
- * Paths for config.yml values
+ * Paths for config.yml values.
  */
 public class ConfigHandler extends ConfigHandlerInterface {
 
@@ -35,6 +36,11 @@ public class ConfigHandler extends ConfigHandlerInterface {
         return getListFromConfig("allowedBlocks");
     }
 
+    /**
+     * Reads messages that can be changed by server admin.
+     *
+     * @return Collection of the defined values
+     */
     public HashMap<String, String> getMessages() {
 
         HashMap<String, String> messages = new HashMap<String, String>();

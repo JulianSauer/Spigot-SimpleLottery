@@ -7,6 +7,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 
+/**
+ * Represents a basic round in the game. Handles a list of tickets.
+ */
 public abstract class RoundInterface {
 
     protected Collection<Ticket> tickets;
@@ -51,8 +54,10 @@ public abstract class RoundInterface {
 
     public abstract boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet);
 
+    // TODO: Replace with handOutRewards()
+
     /**
-     * Finishes the round and returns the owners of tickets with matching ticketNumbers
+     * Finishes the round and returns the owners of tickets that won.
      *
      * @param ticketNumber Number which won the round
      * @return List of ticket owners
@@ -85,6 +90,13 @@ public abstract class RoundInterface {
         return status;
     }
 
+    /**
+     * Changes the status if the round hasn't finished.
+     * Also doesn't work if there's nothing to change.
+     *
+     * @param status Status the game should be changed to
+     * @return True if the status could be changed
+     */
     private boolean changeStatusTo(Status status) {
         if (this.status == Status.GAME_HAS_FINISHED ||
                 this.status == status)
