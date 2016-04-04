@@ -58,13 +58,14 @@ public abstract class LotteryCoordinatorInterface {
      */
     public void finishGame(CommandSender sender) {
 
-        Collection<String> winners;
-        int winningNumber = calc.getWinningNumber();
-
         if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED) {
             chat.sendErrorMessage(sender, "Game #" + roundNumber + " has already stopped.");
             return;
         }
+
+        Collection<String> winners;
+        int winningNumber = calc.getWinningNumber();
+
         winners = round.finishRound(winningNumber);
 
         chat.broadcastWinners(roundNumber, winningNumber, winners);
