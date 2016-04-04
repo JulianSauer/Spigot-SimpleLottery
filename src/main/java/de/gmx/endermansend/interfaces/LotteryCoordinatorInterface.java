@@ -82,7 +82,7 @@ public abstract class LotteryCoordinatorInterface {
      */
     public void addPlayer(Player player, int ticketNumber, String material, int amount) {
 
-        ItemStack bet = InventoryHandler.getBetFromPlayer(material, amount, config.getAllowedMaterials());
+        ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.getAllowedMaterials());
         if (bet == null) {
             chat.sendTicketFailure(player, ticketNumber);
             return;
