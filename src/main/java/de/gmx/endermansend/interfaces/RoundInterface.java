@@ -1,5 +1,6 @@
 package de.gmx.endermansend.interfaces;
 
+import de.gmx.endermansend.chat.ChatHandler;
 import de.gmx.endermansend.game.Ticket;
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public abstract class RoundInterface {
 
     private SimpleLottery main;
 
-    protected ChatHandlerInterface chat;
+    protected ChatHandler chat;
 
     protected int multiplier = 0;
 

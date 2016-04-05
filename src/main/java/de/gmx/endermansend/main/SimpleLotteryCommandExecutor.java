@@ -1,6 +1,6 @@
 package de.gmx.endermansend.main;
 
-import de.gmx.endermansend.handlers.ChatHandler;
+import de.gmx.endermansend.chat.ChatHandler;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -63,7 +63,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Control")) {
             lottery.startNewGame(sender);
         } else {
-            chat.sendPermissionError(sender);
+            chat.message.sendPermissionError(sender);
         }
         return true;
     }
@@ -79,7 +79,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Control"))
             lottery.finishGame(sender);
         else
-            chat.sendPermissionError(sender);
+            chat.message.sendPermissionError(sender);
         return true;
     }
 
@@ -94,7 +94,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Round.ListTickets.Private"))
             lottery.listTicketsPrivate(sender);
         else
-            chat.sendPermissionError(sender);
+            chat.message.sendPermissionError(sender);
         return true;
     }
 
@@ -109,7 +109,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Round.ListTickets.Public"))
             lottery.listTicketsPublic(sender);
         else
-            chat.sendPermissionError(sender);
+            chat.message.sendPermissionError(sender);
         return true;
     }
 
@@ -132,10 +132,10 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                 int amount = Integer.parseInt(args[3]);
                 lottery.addPlayer(player, ticketNumber, material, amount);
             } else
-                chat.sendPermissionError(sender);
+                chat.message.sendPermissionError(sender);
 
         } else {
-            chat.sendOnlyPlayersCanDoThat(sender);
+            chat.message.sendOnlyPlayersCanDoThat(sender);
         }
         return true;
 

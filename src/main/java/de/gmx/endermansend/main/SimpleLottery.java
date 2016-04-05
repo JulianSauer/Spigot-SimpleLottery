@@ -1,15 +1,13 @@
 package de.gmx.endermansend.main;
 
+import de.gmx.endermansend.chat.ChatHandler;
 import de.gmx.endermansend.game.LotteryCalculator;
 import de.gmx.endermansend.game.LotteryCoordinatorAuto;
-import de.gmx.endermansend.handlers.ChatHandler;
 import de.gmx.endermansend.handlers.ConfigHandler;
 import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
 import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Logger;
 
 public class SimpleLottery extends JavaPlugin {
 
@@ -28,13 +26,13 @@ public class SimpleLottery extends JavaPlugin {
         lottery = new LotteryCoordinatorAuto(this);
         this.getCommand("lottery").setExecutor(new SimpleLotteryCommandExecutor(this));
 
-        chat.logPluginEnabled();
+        chat.message.logPluginEnabled();
 
     }
 
     @Override
     public void onDisable() {
-        chat.logPluginDisabled();
+        chat.message.logPluginDisabled();
     }
 
     public ConfigHandlerInterface getConfigHandler() {

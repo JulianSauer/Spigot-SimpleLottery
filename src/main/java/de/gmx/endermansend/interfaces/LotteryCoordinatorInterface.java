@@ -1,5 +1,6 @@
 package de.gmx.endermansend.interfaces;
 
+import de.gmx.endermansend.chat.ChatHandler;
 import de.gmx.endermansend.game.RoundWithDefaultSettings;
 import de.gmx.endermansend.handlers.InventoryHandler;
 import de.gmx.endermansend.main.SimpleLottery;
@@ -24,7 +25,7 @@ public abstract class LotteryCoordinatorInterface {
 
     private LotteryCalculatorInterface calc;
 
-    private ChatHandlerInterface chat;
+    private ChatHandler chat;
 
     protected LotteryCoordinatorInterface(SimpleLottery main) {
         this.main = main;
@@ -42,12 +43,12 @@ public abstract class LotteryCoordinatorInterface {
 
         if (round != null) {
             if (round.getStatus() != RoundInterface.Status.GAME_HAS_FINISHED) {
-                chat.sendRoundNotFinished(sender, round);
+                chat.message.sendRoundNotFinished(sender, round);
                 return;
             }
         }
         round = new RoundWithDefaultSettings(main, ++roundNumber);
-        chat.broadcastRoundStart(roundNumber);
+        chat.message.broadcastRoundStart(roundNumber);
 
     }
 
@@ -59,7 +60,7 @@ public abstract class LotteryCoordinatorInterface {
     public void finishGame(CommandSender sender) {
 
         if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED) {
-            chat.sendRoundNotRunning(sender, round);
+            chat.message.sendRoundNotRunning(sender, round);
             return;
         }
 
@@ -68,7 +69,7 @@ public abstract class LotteryCoordinatorInterface {
 
         winners = round.finishRound(winningNumber);
 
-        chat.broadcastWinners(roundNumber, winningNumber, winners);
+        chat.message.broadcastWinners(roundNumber, winningNumber, winners);
 
     }
 
@@ -84,14 +85,14 @@ public abstract class LotteryCoordinatorInterface {
 
         ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.getAllowedMaterials(), chat);
         if (bet == null) {
-            chat.sendTicketFailure(player, ticketNumber);
+            chat.message.sendTicketFailure(player, ticketNumber);
             return;
         }
 
         if (round.addLotteryEntry(player, ticketNumber, bet)) {
-            chat.sendTicketBought(player, ticketNumber);
+            chat.message.sendTicketBought(player, ticketNumber);
         } else {
-            chat.sendTicketFailure(player, ticketNumber);
+            chat.message.sendTicketFailure(player, ticketNumber);
         }
 
     }
@@ -104,10 +105,10 @@ public abstract class LotteryCoordinatorInterface {
     public void listTicketsPublic(CommandSender sender) {
 
         if (round == null) {
-            chat.sendRoundNotStarted(sender);
+            chat.message.sendRoundNotStarted(sender);
             return;
         }
-        chat.broadcastBoughtTickets(round);
+        chat.message.broadcastBoughtTickets(round);
     }
 
     /**
@@ -117,10 +118,10 @@ public abstract class LotteryCoordinatorInterface {
      */
     public void listTicketsPrivate(CommandSender sender) {
         if (round == null) {
-            chat.sendRoundNotStarted(sender);
+            chat.message.sendRoundNotStarted(sender);
             return;
         }
-        chat.sendBoughtTickets(sender, round);
+        chat.message.sendBoughtTickets(sender, round);
     }
 
 }

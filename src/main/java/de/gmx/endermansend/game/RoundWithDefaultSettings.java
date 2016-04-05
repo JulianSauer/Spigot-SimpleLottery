@@ -116,7 +116,7 @@ public class RoundWithDefaultSettings extends RoundInterface {
             Player player = t.getOwner();
             winners.add(player.getName());
             if (!(InventoryHandler.giveRewardToPlayer(player, t.getReward(multiplier))))
-                chat.sendRewardError(player);
+                chat.message.sendRewardError(player);
         }
 
         return winners;
