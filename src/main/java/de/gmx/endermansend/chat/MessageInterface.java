@@ -1,6 +1,6 @@
 package de.gmx.endermansend.chat;
 
-import de.gmx.endermansend.interfaces.RoundInterface;
+import de.gmx.endermansend.game.RoundInterface;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

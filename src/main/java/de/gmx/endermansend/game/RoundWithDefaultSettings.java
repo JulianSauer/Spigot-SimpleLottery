@@ -1,7 +1,6 @@
 package de.gmx.endermansend.game;
 
-import de.gmx.endermansend.handlers.InventoryHandler;
-import de.gmx.endermansend.interfaces.RoundInterface;
+import de.gmx.endermansend.helper.InventoryHandler;
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -1,6 +1,4 @@
-package de.gmx.endermansend.game;
-
-import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
+package de.gmx.endermansend.helper;
 
 /**
  * Implements the calculation methods for determining a winner.

@@ -1,9 +1,9 @@
-package de.gmx.endermansend.interfaces;
+package de.gmx.endermansend.game;
 
 import de.gmx.endermansend.Config.ConfigHandler;
 import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.game.RoundWithDefaultSettings;
-import de.gmx.endermansend.handlers.InventoryHandler;
+import de.gmx.endermansend.helper.InventoryHandler;
+import de.gmx.endermansend.helper.LotteryCalculatorInterface;
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

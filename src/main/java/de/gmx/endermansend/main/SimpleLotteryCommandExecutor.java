@@ -1,7 +1,7 @@
 package de.gmx.endermansend.main;
 
 import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
+import de.gmx.endermansend.game.LotteryCoordinatorInterface;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

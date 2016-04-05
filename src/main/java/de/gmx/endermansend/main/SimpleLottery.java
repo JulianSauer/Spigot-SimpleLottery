@@ -2,10 +2,10 @@ package de.gmx.endermansend.main;
 
 import de.gmx.endermansend.Config.ConfigHandler;
 import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.game.LotteryCalculator;
+import de.gmx.endermansend.helper.LotteryCalculator;
 import de.gmx.endermansend.game.LotteryCoordinatorAuto;
-import de.gmx.endermansend.interfaces.LotteryCalculatorInterface;
-import de.gmx.endermansend.interfaces.LotteryCoordinatorInterface;
+import de.gmx.endermansend.helper.LotteryCalculatorInterface;
+import de.gmx.endermansend.game.LotteryCoordinatorInterface;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SimpleLottery extends JavaPlugin {

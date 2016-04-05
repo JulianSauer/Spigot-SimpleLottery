@@ -1,4 +1,4 @@
-package de.gmx.endermansend.interfaces;
+package de.gmx.endermansend.helper;
 
 /**
  * Calculates a winning number based on the given range.

@@ -1,4 +1,4 @@
-package de.gmx.endermansend.interfaces;
+package de.gmx.endermansend.game;
 
 import de.gmx.endermansend.chat.ChatHandler;
 import de.gmx.endermansend.game.Ticket;
