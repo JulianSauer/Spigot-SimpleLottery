@@ -44,7 +44,7 @@ public abstract class LotteryCoordinatorInterface {
 
         if (round != null) {
             if (round.getStatus() != RoundInterface.Status.GAME_HAS_FINISHED) {
-                chat.message.sendRoundNotFinished(sender, round);
+                chat.message.sendRoundStatusError(sender, round);
                 return;
             }
         }
@@ -60,8 +60,8 @@ public abstract class LotteryCoordinatorInterface {
      */
     public void finishGame(CommandSender sender) {
 
-        if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED) {
-            chat.message.sendRoundNotRunning(sender, round);
+        if (gameIsNotRunning()) {
+            chat.message.sendRoundStatusError(sender, round);
             return;
         }
 
@@ -83,6 +83,11 @@ public abstract class LotteryCoordinatorInterface {
      * @param amount       Player's desired amount of bet items
      */
     public void addPlayer(Player player, int ticketNumber, String material, int amount) {
+
+        if (gameIsNotRunning()) {
+            chat.message.sendRoundStatusError(player, round);
+            return;
+        }
 
         ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.get.allowedMaterials(), chat);
         if (bet == null) {
@@ -106,7 +111,7 @@ public abstract class LotteryCoordinatorInterface {
     public void listTicketsPublic(CommandSender sender) {
 
         if (round == null) {
-            chat.message.sendRoundNotStarted(sender);
+            chat.message.sendRoundStatusError(sender, round);
             return;
         }
         chat.message.broadcastBoughtTickets(round);
@@ -119,10 +124,23 @@ public abstract class LotteryCoordinatorInterface {
      */
     public void listTicketsPrivate(CommandSender sender) {
         if (round == null) {
-            chat.message.sendRoundNotStarted(sender);
+            chat.message.sendRoundStatusError(sender, round);
             return;
         }
         chat.message.sendBoughtTickets(sender, round);
+    }
+
+    /**
+     * Checks the state of the current round.
+     *
+     * @return True if the round is finished or doesn't exist
+     */
+    private boolean gameIsNotRunning() {
+        if (round == null)
+            return true;
+        if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED)
+            return true;
+        return false;
     }
 
 }

@@ -47,7 +47,7 @@ public class GetValuesFromConfig {
         messages.put("round.status.statusMessage", config.getStringFromConfig("messages.round.status.statusMessage"));
         messages.put("round.status.running", config.getStringFromConfig("messages.round.status.running"));
         messages.put("round.status.halted", config.getStringFromConfig("messages.round.status.halted"));
-        messages.put("round.status.ended", config.getStringFromConfig("messages.round.status.ended"));
+        messages.put("round.status.finished", config.getStringFromConfig("messages.round.status.ended"));
         messages.put("round.winningNumber", config.getStringFromConfig("messages.round.winningNumber"));
         messages.put("round.winners", config.getStringFromConfig("messages.round.winners"));
         messages.put("round.noWinners", config.getStringFromConfig("messages.round.noWinners"));

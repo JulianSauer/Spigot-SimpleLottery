@@ -49,7 +49,9 @@ public interface MessageInterface {
      * @param receiver Initiator of the command
      * @param round    Interface of the round object which's status should be displayed
      */
-    void sendStatus(CommandSender receiver, RoundInterface round);
+    void sendRoundStatus(CommandSender receiver, RoundInterface round);
+
+    void sendRoundStatusError(CommandSender receiver, RoundInterface round);
 
     void sendTicketBought(Player receiver, int ticketNumber);
 
@@ -72,12 +74,6 @@ public interface MessageInterface {
      * @param round  Round object containing the ticket list
      */
     void sendBoughtTickets(CommandSender sender, RoundInterface round);
-
-    void sendRoundNotRunning(CommandSender receiver, RoundInterface round);
-
-    void sendRoundNotStarted(CommandSender receiver);
-
-    void sendRoundNotFinished(CommandSender receiver, RoundInterface round);
 
     // Log messages
     void logPluginEnabled();

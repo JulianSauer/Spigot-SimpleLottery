@@ -34,9 +34,6 @@ public class Message implements MessageInterface {
 
         adminMessages.put("plugin.enabled", "SimpleLottery enabled");
         adminMessages.put("plugin.disabled", "SimpleLottery disabled");
-        adminMessages.put("round.notRunning", "Game #<<roundNumber>> has already stopped.");
-        adminMessages.put("round.notStarted", "No round has started yet!");
-        adminMessages.put("round.notFinished", "Can't start new game. Round #<<roundNumber>> is not over!");
         adminMessages.put("error.noPlayer", "Only players can perform this command.");
 
     }
@@ -108,20 +105,12 @@ public class Message implements MessageInterface {
         chat.sendErrorMessage(sender, messages.get("permissionError"));
     }
 
-    public void sendStatus(CommandSender receiver, RoundInterface round) {
-        String statusText;
-        RoundInterface.Status status = round.getStatus();
+    public void sendRoundStatus(CommandSender receiver, RoundInterface round) {
+        chat.sendMessage(receiver, getRoundStatus(receiver, round));
+    }
 
-        if (status == RoundInterface.Status.GAME_IS_RUNNING) {
-            statusText = messages.get("round.status.running");
-        } else if (status == RoundInterface.Status.GAME_IS_RUNNING) {
-            statusText = messages.get("round.status.halted");
-        } else {
-            statusText = messages.get("round.status.ended");
-        }
-
-        String msg = messages.get("round.status".replace("<<roundNumber>>", "" + round.getRoundNumber()).replace("<<status>>", statusText));
-        chat.sendMessage(receiver, msg);
+    public void sendRoundStatusError(CommandSender receiver, RoundInterface round) {
+        chat.sendErrorMessage(receiver, getRoundStatus(receiver, round));
     }
 
     public void sendTicketBought(Player receiver, int ticketNumber) {
@@ -163,20 +152,6 @@ public class Message implements MessageInterface {
             chat.sendListEntry(sender, ticket.toString());
     }
 
-    public void sendRoundNotRunning(CommandSender receiver, RoundInterface round) {
-        String msg = chat.adminMessages.get("round.notRunning").replace("<<roundNumber>>", "" + round.getRoundNumber());
-        receiver.sendMessage(msg);
-    }
-
-    public void sendRoundNotStarted(CommandSender receiver) {
-        receiver.sendMessage(chat.adminMessages.get("round.notStarted"));
-    }
-
-    public void sendRoundNotFinished(CommandSender receiver, RoundInterface round) {
-        String msg = chat.adminMessages.get("round.notFinished").replace("<<roundNumber>>", "" + round.getRoundNumber());
-        receiver.sendMessage(msg);
-    }
-
     // Log messages
     public void logPluginEnabled() {
         logger.info(adminMessages.get("plugin.enabled"));
@@ -184,6 +159,28 @@ public class Message implements MessageInterface {
 
     public void logPluginDisabled() {
         logger.info(adminMessages.get("plugin.disabled"));
+    }
+
+    private String getRoundStatus(CommandSender receiver, RoundInterface round) {
+
+        String statusText;
+
+        RoundInterface.Status status = null;
+        String roundNumber = "0";
+
+        if (round != null) {
+            status = round.getStatus();
+            roundNumber = "" + round.getRoundNumber();
+        }
+
+        if (status == RoundInterface.Status.GAME_IS_RUNNING) {
+            statusText = messages.get("round.status.running");
+        } else if (status == RoundInterface.Status.GAME_IS_RUNNING) {
+            statusText = messages.get("round.status.halted");
+        } else {
+            statusText = messages.get("round.status.finished");
+        }
+        return messages.get("round.status.statusMessage").replace("<<roundNumber>>", roundNumber).replace("<<status>>", statusText);
     }
 
 }

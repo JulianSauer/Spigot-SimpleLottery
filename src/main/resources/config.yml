@@ -18,7 +18,7 @@ messages:
       statusMessage: "Game #<<roundNumber>> is <<status>>"
       running: "running."
       halted: "halted."
-      ended: "over."
+      finished: "over."
     winningNumber: "Winning number is <<winningNumber>>!"
     winners: "Winner(s):"
     noWinners: "Nobody won :("
