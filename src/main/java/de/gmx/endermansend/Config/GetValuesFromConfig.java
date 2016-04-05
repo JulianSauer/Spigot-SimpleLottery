@@ -18,8 +18,12 @@ public class GetValuesFromConfig {
         return config.getBooleanFromConfig("autoMode.enabled");
     }
 
-    public int autoModeInterval() {
-        return config.getIntFromConfig("autoMode.interval");
+    public int autoModeRoundInterval() {
+        return config.getIntFromConfig("autoMode.roundInterval");
+    }
+
+    public int autoModeBreakInterval() {
+        return config.getIntFromConfig("autoMode.breakInterval");
     }
 
     public int roundDuration() {
@@ -47,7 +51,9 @@ public class GetValuesFromConfig {
         messages.put("round.status.statusMessage", config.getStringFromConfig("messages.round.status.statusMessage"));
         messages.put("round.status.running", config.getStringFromConfig("messages.round.status.running"));
         messages.put("round.status.halted", config.getStringFromConfig("messages.round.status.halted"));
-        messages.put("round.status.finished", config.getStringFromConfig("messages.round.status.ended"));
+        messages.put("round.status.finished", config.getStringFromConfig("messages.round.status.finished"));
+        messages.put("round.status.startsSoon", config.getStringFromConfig("messages.round.status.startsSoon"));
+        messages.put("round.status.stopsSoon", config.getStringFromConfig("messages.round.status.stopsSoon"));
         messages.put("round.winningNumber", config.getStringFromConfig("messages.round.winningNumber"));
         messages.put("round.winners", config.getStringFromConfig("messages.round.winners"));
         messages.put("round.noWinners", config.getStringFromConfig("messages.round.noWinners"));

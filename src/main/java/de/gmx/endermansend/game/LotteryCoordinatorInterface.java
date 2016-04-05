@@ -16,17 +16,17 @@ import java.util.Collection;
  */
 public abstract class LotteryCoordinatorInterface {
 
-    private int roundNumber = 0;
+    protected int roundNumber = 0;
 
-    private SimpleLottery main;
+    protected SimpleLottery main;
 
-    private ConfigHandler config;
+    protected ConfigHandler config;
 
-    private RoundInterface round;
+    protected RoundInterface round;
 
-    private LotteryCalculatorInterface calc;
+    protected LotteryCalculatorInterface calc;
 
-    private ChatHandler chat;
+    protected ChatHandler chat;
 
     protected LotteryCoordinatorInterface(SimpleLottery main) {
         this.main = main;
@@ -44,7 +44,8 @@ public abstract class LotteryCoordinatorInterface {
 
         if (round != null) {
             if (round.getStatus() != RoundInterface.Status.GAME_HAS_FINISHED) {
-                chat.message.sendRoundStatusError(sender, round);
+                if (sender != null)
+                    chat.message.sendRoundStatusError(sender, round);
                 return;
             }
         }
@@ -61,7 +62,8 @@ public abstract class LotteryCoordinatorInterface {
     public void finishGame(CommandSender sender) {
 
         if (gameIsNotRunning()) {
-            chat.message.sendRoundStatusError(sender, round);
+            if (sender != null)
+                chat.message.sendRoundStatusError(sender, round);
             return;
         }
 
@@ -135,7 +137,7 @@ public abstract class LotteryCoordinatorInterface {
      *
      * @return True if the round is finished or doesn't exist
      */
-    private boolean gameIsNotRunning() {
+    protected boolean gameIsNotRunning() {
         if (round == null)
             return true;
         if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED)

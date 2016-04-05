@@ -21,6 +21,10 @@ public interface MessageInterface {
      */
     void broadcastStatus(RoundInterface round);
 
+    void broadcastStatusStartsSoon(int roundNumber, int seconds);
+
+    void broadcastStatusStopsSoon(int roundNumber, int seconds);
+
     /**
      * Displays the winning number as well as every player that has bought a ticket in the round with that number. If
      * nobody won, an alternative message will be displayed instead.

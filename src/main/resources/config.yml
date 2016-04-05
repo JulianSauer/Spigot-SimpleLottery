@@ -1,6 +1,7 @@
 autoMode:
   enabled: true
-  interval: 60
+  roundInterval: 10
+  breakInterval: 5
 round:
   duration: 5
   multiplier: 10
@@ -19,6 +20,8 @@ messages:
       running: "running."
       halted: "halted."
       finished: "over."
+      startsSoon: "Round #<<roundNumber>> starts in <<seconds>>s"
+      stopsSoon: "Round #<<roundNumber>> stops in <<seconds>>s"
     winningNumber: "Winning number is <<winningNumber>>!"
     winners: "Winner(s):"
     noWinners: "Nobody won :("

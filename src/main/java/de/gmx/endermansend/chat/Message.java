@@ -51,20 +51,18 @@ public class Message implements MessageInterface {
 
     public void broadcastStatus(RoundInterface round) {
 
-        String statusText;
-        RoundInterface.Status status = round.getStatus();
+        chat.broadcastMessage(getRoundStatus(round));
 
-        if (status == RoundInterface.Status.GAME_IS_RUNNING) {
-            statusText = messages.get("round.status.running");
-        } else if (status == RoundInterface.Status.GAME_IS_RUNNING) {
-            statusText = messages.get("round.status.halted");
-        } else {
-            statusText = messages.get("round.status.ended");
-        }
+    }
 
-        String msg = messages.get("round.status".replace("<<roundNumber>>", "" + round.getRoundNumber()).replace("<<status>>", statusText));
+    public void broadcastStatusStartsSoon(int roundNumber, int seconds) {
+        String msg = messages.get("round.status.startsSoon").replace("<<roundNumber>>", "" + roundNumber).replace("<<seconds>>", "" + seconds);
         chat.broadcastMessage(msg);
+    }
 
+    public void broadcastStatusStopsSoon(int roundNumber, int seconds) {
+        String msg = messages.get("round.status.stopsSoon").replace("<<roundNumber>>", "" + roundNumber).replace("<<seconds>>", "" + seconds);
+        chat.broadcastMessage(msg);
     }
 
     public void broadcastWinners(int roundNumber, int winningNumber, Collection<String> winners) {
@@ -106,11 +104,11 @@ public class Message implements MessageInterface {
     }
 
     public void sendRoundStatus(CommandSender receiver, RoundInterface round) {
-        chat.sendMessage(receiver, getRoundStatus(receiver, round));
+        chat.sendMessage(receiver, getRoundStatus(round));
     }
 
     public void sendRoundStatusError(CommandSender receiver, RoundInterface round) {
-        chat.sendErrorMessage(receiver, getRoundStatus(receiver, round));
+        chat.sendErrorMessage(receiver, getRoundStatus(round));
     }
 
     public void sendTicketBought(Player receiver, int ticketNumber) {
@@ -161,7 +159,7 @@ public class Message implements MessageInterface {
         logger.info(adminMessages.get("plugin.disabled"));
     }
 
-    private String getRoundStatus(CommandSender receiver, RoundInterface round) {
+    private String getRoundStatus(RoundInterface round) {
 
         String statusText;
 
