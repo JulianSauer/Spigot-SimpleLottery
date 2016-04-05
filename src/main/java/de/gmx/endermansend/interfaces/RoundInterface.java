@@ -34,7 +34,7 @@ public abstract class RoundInterface {
 
         this.main = main;
         this.chat = main.getChat();
-        this.multiplier = main.getConfigHandler().getRoundMultiplier();
+        this.multiplier = main.getConfigHandler().get.roundMultiplier();
 
         this.roundNumber = roundNumber;
         status = Status.GAME_IS_RUNNING;

@@ -1,5 +1,6 @@
 package de.gmx.endermansend.interfaces;
 
+import de.gmx.endermansend.Config.ConfigHandler;
 import de.gmx.endermansend.chat.ChatHandler;
 import de.gmx.endermansend.game.RoundWithDefaultSettings;
 import de.gmx.endermansend.handlers.InventoryHandler;
@@ -19,7 +20,7 @@ public abstract class LotteryCoordinatorInterface {
 
     private SimpleLottery main;
 
-    private ConfigHandlerInterface config;
+    private ConfigHandler config;
 
     private RoundInterface round;
 
@@ -83,7 +84,7 @@ public abstract class LotteryCoordinatorInterface {
      */
     public void addPlayer(Player player, int ticketNumber, String material, int amount) {
 
-        ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.getAllowedMaterials(), chat);
+        ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.get.allowedMaterials(), chat);
         if (bet == null) {
             chat.message.sendTicketFailure(player, ticketNumber);
             return;

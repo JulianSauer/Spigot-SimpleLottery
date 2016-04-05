@@ -30,7 +30,7 @@ public class ChatHandler {
     public ChatHandler(SimpleLottery main) {
 
         logger = main.getLogger();
-        messages = main.getConfigHandler().getMessages();
+        messages = main.getConfigHandler().get.messages();
         adminMessages = new HashMap<String, String>();
         message = new Message(this);
 

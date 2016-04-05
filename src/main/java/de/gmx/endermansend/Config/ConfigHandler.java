@@ -1,4 +1,4 @@
-package de.gmx.endermansend.interfaces;
+package de.gmx.endermansend.Config;
 
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,19 +8,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
-// TODO: Move declarations of getter methods to ConfigHandler
 /**
  * Handles everything config specific like loading the config.yml file safely and getting values from it.
  * Concrete value paths have to be defined in a class implementing this interface (well or extending because it's not
  * actually an interface but shh!).
  */
-public abstract class ConfigHandlerInterface {
+public class ConfigHandler {
+
+    public GetValuesFromConfig get;
 
     private SimpleLottery main;
     private Logger logger;
     private FileConfiguration config;
 
-    protected ConfigHandlerInterface(SimpleLottery main) {
+    public ConfigHandler(SimpleLottery main) {
 
         this.main = main;
         this.logger = this.main.getLogger();
@@ -28,6 +29,7 @@ public abstract class ConfigHandlerInterface {
         if (!loadConfig())
             createDefaultConfig();
 
+        get = new GetValuesFromConfig(this);
 
     }
 
@@ -39,18 +41,6 @@ public abstract class ConfigHandlerInterface {
         main.saveConfig();
         logger.info("Config saved");
     }
-
-    public abstract boolean getAutoModeEnabled();
-
-    public abstract int getAutoModeInterval();
-
-    public abstract int getRoundDuration();
-
-    public abstract int getRoundMultiplier();
-
-    public abstract List<String> getAllowedMaterials();
-
-    public abstract HashMap<String, String> getMessages();
 
     /**
      * Tries to convert the value found under the given path to a boolean. If it cannot be found in config.yml, an
