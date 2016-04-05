@@ -1,13 +1,15 @@
 package de.gmx.endermansend.interfaces;
 
+import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
-// TODO: Reduce uses of logger
 /**
  * Should be used for chat interaction to keep message formatting consistent.
  */
@@ -21,9 +23,15 @@ public abstract class ChatHandlerInterface {
 
     protected HashMap<String, String> messages;
 
-    // TODO: Replace ConfigHandlerInterface with SimpleLottery
-    protected ChatHandlerInterface(ConfigHandlerInterface config) {
-        messages = config.getMessages();
+    protected HashMap<String, String> adminMessages;
+
+    protected Logger logger;
+
+    protected ChatHandlerInterface(SimpleLottery main) {
+        messages = main.getConfigHandler().getMessages();
+        adminMessages = new HashMap<String, String>();
+
+        logger = main.getLogger();
     }
 
     protected void broadcastMessage(String msg) {
@@ -38,11 +46,11 @@ public abstract class ChatHandlerInterface {
         receiver.sendMessage(pluginTag + " " + msg);
     }
 
-    public void sendErrorMessage(CommandSender receiver, String msg) {
+    protected void sendErrorMessage(CommandSender receiver, String msg) {
         receiver.sendMessage(errorTag + " " + msg);
     }
 
-    public void sendListEntry(CommandSender receiver, String msg) {
+    protected void sendListEntry(CommandSender receiver, String msg) {
         receiver.sendMessage(listTag + " " + msg);
     }
 
@@ -56,16 +64,36 @@ public abstract class ChatHandlerInterface {
 
     public abstract void broadcastBoughtTickets(RoundInterface round);
 
-    public abstract void sendHaveToBePlayerError(CommandSender sender);
+    public abstract void sendOnlyPlayersCanDoThat(CommandSender receiver);
 
-    public abstract void sendPermissionError(CommandSender sender);
+    public abstract void sendPermissionError(CommandSender receiver);
+
+    public abstract void sendStatus(CommandSender receiver, RoundInterface round);
 
     public abstract void sendTicketBought(Player receiver, int ticketNumber);
 
     public abstract void sendTicketFailure(Player receiver, int ticketNumber);
 
-    public abstract void sendBoughtTickets(CommandSender sender, RoundInterface round);
+    public abstract void sendAlreadyExists(Player receiver, int ticketNumber);
+
+    public abstract void sendTooManyTickets(Player receiver);
+
+    public abstract void sendRoundOver(Player receiver);
+
+    public abstract void sendToPoor(Player receiver, ItemStack bet);
 
     public abstract void sendRewardError(Player receiver);
+
+    public abstract void sendBoughtTickets(CommandSender receiver, RoundInterface round);
+
+    public abstract void sendRoundNotRunning(CommandSender receiver, RoundInterface round);
+
+    public abstract void sendRoundNotStarted(CommandSender receiver);
+
+    public abstract void sendRoundNotFinished(CommandSender receiver, RoundInterface round);
+
+    public abstract void logPluginEnabled();
+
+    public abstract void logPluginDisabled();
 
 }

@@ -81,6 +81,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "\nOwner: " + owner + " Ticket Number: " + ticketNumber;
+        return owner + ": " + ticketNumber;
     }
 }

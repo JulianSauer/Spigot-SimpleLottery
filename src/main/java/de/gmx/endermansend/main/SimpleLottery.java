@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 public class SimpleLottery extends JavaPlugin {
 
-    private Logger logger;
     private ConfigHandlerInterface config;
     private LotteryCoordinatorInterface lottery;
     private ChatHandler chat;
@@ -22,21 +21,20 @@ public class SimpleLottery extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        this.logger = getLogger();
         this.config = new ConfigHandler(this);
-        this.chat = new ChatHandler(config);
+        this.chat = new ChatHandler(this);
         this.calc = new LotteryCalculator(1, 10);
 
         lottery = new LotteryCoordinatorAuto(this);
         this.getCommand("lottery").setExecutor(new SimpleLotteryCommandExecutor(this));
 
-        logger.info("SimpleLottery enabled");
+        chat.logPluginEnabled();
 
     }
 
     @Override
     public void onDisable() {
-        logger.info("SimpleLottery disabled");
+        chat.logPluginDisabled();
     }
 
     public ConfigHandlerInterface getConfigHandler() {

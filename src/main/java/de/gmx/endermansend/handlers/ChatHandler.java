@@ -4,9 +4,11 @@ import de.gmx.endermansend.game.Ticket;
 import de.gmx.endermansend.interfaces.ChatHandlerInterface;
 import de.gmx.endermansend.interfaces.ConfigHandlerInterface;
 import de.gmx.endermansend.interfaces.RoundInterface;
+import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,26 +18,36 @@ import java.util.Collection;
  */
 public class ChatHandler extends ChatHandlerInterface {
 
-    public ChatHandler(ConfigHandlerInterface config) {
+    public ChatHandler(SimpleLottery main) {
 
-        super(config);
+        super(main);
 
         pluginTag = ChatColor.GOLD + "[Simple Lottery]" + ChatColor.RESET;
         errorTag = ChatColor.RED + "[Simple Lottery]" + ChatColor.RESET;
         listTag = "                     -";
 
+        adminMessages.put("plugin.enabled", "SimpleLottery enabled");
+        adminMessages.put("plugin.disabled", "SimpleLottery disabled");
+        adminMessages.put("round.notRunning", "Game #<<roundNumber>> has already stopped.");
+        adminMessages.put("round.notStarted", "No round has started yet!");
+        adminMessages.put("round.notFinished", "Can't start new game. Round #<<roundNumber>> is not over!");
+        adminMessages.put("error.noPlayer", "Only players can perform this command.");
+
     }
 
+    // Public messages
     public void broadcastRoundStart(int roundNumber) {
-        broadcastMessage(messages.get("round.start").replace("<<roundNumber>>", "" + roundNumber));
+        String msg = messages.get("round.start").replace("<<roundNumber>>", "" + roundNumber);
+        broadcastMessage(msg);
     }
 
     public void broadcastRoundEnd(int roundNumber) {
-        broadcastMessage(messages.get("round.end").replace("<<roundNumber>>", "" + roundNumber));
+        String msg = messages.get("round.end").replace("<<roundNumber>>", "" + roundNumber);
+        broadcastMessage(msg);
     }
 
     /**
-     * Displays the status of a round object.
+     * Displays the status of the current/last round.
      *
      * @param round Interface of the round object which's status should be displayed
      */
@@ -52,7 +64,8 @@ public class ChatHandler extends ChatHandlerInterface {
             statusText = messages.get("round.status.ended");
         }
 
-        broadcastMessage(messages.get("round.status".replace("<<roundNumber>>", "" + round.getRoundNumber()).replace("<<status>>", statusText)));
+        String msg = messages.get("round.status".replace("<<roundNumber>>", "" + round.getRoundNumber()).replace("<<status>>", statusText));
+        broadcastMessage(msg);
 
     }
 
@@ -67,7 +80,8 @@ public class ChatHandler extends ChatHandlerInterface {
     public void broadcastWinners(int roundNumber, int winningNumber, Collection<String> winners) {
 
         broadcastRoundEnd(roundNumber);
-        broadcastMessage(messages.get("round.winningNumber").replace("<<winningNumber>>", "" + winningNumber));
+        String msg = messages.get("round.winningNumber").replace("<<winningNumber>>", "" + winningNumber);
+        broadcastMessage(msg);
 
         if (!winners.isEmpty()) {
 
@@ -92,29 +106,72 @@ public class ChatHandler extends ChatHandlerInterface {
     public void broadcastBoughtTickets(RoundInterface round) {
 
         ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
-        broadcastMessage("Bought tickets:");
+        broadcastMessage(messages.get("ticket.list"));
         for (Ticket ticket : tickets)
-            broadcastListEntry(ticket.getOwner() + ": " + ticket.getTicketNumber());
+            broadcastListEntry(ticket.toString());
     }
 
-    public void sendListEntry(CommandSender sender, String msg) {
-        // TODO: idk why there's no implementation here
-    }
-
-    public void sendHaveToBePlayerError(CommandSender sender) {
-        sendErrorMessage(sender, "Only players can perform this command.");
+    // Private messages
+    public void sendOnlyPlayersCanDoThat(CommandSender sender) {
+        sendErrorMessage(sender, adminMessages.get("error.noPlayer"));
     }
 
     public void sendPermissionError(CommandSender sender) {
-        sendErrorMessage(sender, "You do not have permission to perform this command.");
+        sendErrorMessage(sender, messages.get("permissionError"));
+    }
+
+    /**
+     * Sends the status of the current/last round.
+     *
+     * @param receiver Initiator of the command
+     * @param round    Interface of the round object which's status should be displayed
+     */
+    public void sendStatus(CommandSender receiver, RoundInterface round) {
+        String statusText;
+        RoundInterface.Status status = round.getStatus();
+
+        if (status == RoundInterface.Status.GAME_IS_RUNNING) {
+            statusText = messages.get("round.status.running");
+        } else if (status == RoundInterface.Status.GAME_IS_RUNNING) {
+            statusText = messages.get("round.status.halted");
+        } else {
+            statusText = messages.get("round.status.ended");
+        }
+
+        String msg = messages.get("round.status".replace("<<roundNumber>>", "" + round.getRoundNumber()).replace("<<status>>", statusText));
+        sendMessage(receiver, msg);
     }
 
     public void sendTicketBought(Player receiver, int ticketNumber) {
-        sendMessage(receiver, messages.get("ticket.bought").replace("<<ticketNumber>>", "" + ticketNumber));
+        String msg = messages.get("ticket.bought").replace("<<ticketNumber>>", "" + ticketNumber);
+        sendMessage(receiver, msg);
     }
 
     public void sendTicketFailure(Player receiver, int ticketNumber) {
-        sendMessage(receiver, messages.get("ticket.failure").replace("<<ticketNumber>>", "" + ticketNumber));
+        String msg = messages.get("ticket.error.general").replace("<<ticketNumber>>", "" + ticketNumber);
+        sendErrorMessage(receiver, msg);
+    }
+
+    public void sendAlreadyExists(Player receiver, int ticketNumber) {
+        String msg = messages.get("ticket.error.alreadyExists").replace("<<ticketNumber>>", "" + ticketNumber);
+        sendErrorMessage(receiver, msg);
+    }
+
+    public void sendTooManyTickets(Player receiver) {
+        sendErrorMessage(receiver, messages.get("ticket.error.tooMany"));
+    }
+
+    public void sendRoundOver(Player receiver) {
+        sendErrorMessage(receiver, messages.get("ticket.error.roundOver"));
+    }
+
+    public void sendToPoor(Player receiver, ItemStack bet) {
+        String msg = messages.get("ticket.error.tooPoor").replace("<<amount>>", "" + bet.getAmount()).replace("<<material>>", bet.getType().name());
+        sendErrorMessage(receiver, msg);
+    }
+
+    public void sendRewardError(Player receiver) {
+        sendErrorMessage(receiver, messages.get("ticket.rewardFailure"));
     }
 
     /**
@@ -125,13 +182,32 @@ public class ChatHandler extends ChatHandlerInterface {
      */
     public void sendBoughtTickets(CommandSender sender, RoundInterface round) {
         ArrayList<Ticket> tickets = (ArrayList<Ticket>) round.getTickets();
-        sendMessage(sender, "Bought tickets:");
+        sendMessage(sender, messages.get("ticket.list"));
         for (Ticket ticket : tickets)
-            sendListEntry(sender, ticket.getOwner() + ": " + ticket.getTicketNumber());
+            sendListEntry(sender, ticket.toString());
     }
 
-    public void sendRewardError(Player receiver) {
-        sendErrorMessage(receiver, messages.get("ticket.rewardFailure"));
+    public void sendRoundNotRunning(CommandSender receiver, RoundInterface round) {
+        String msg = adminMessages.get("round.notRunning").replace("<<roundNumber>>", "" + round.getRoundNumber());
+        receiver.sendMessage(msg);
+    }
+
+    public void sendRoundNotStarted(CommandSender receiver) {
+        receiver.sendMessage(adminMessages.get("round.notStarted"));
+    }
+
+    public void sendRoundNotFinished(CommandSender receiver, RoundInterface round) {
+        String msg = adminMessages.get("round.notFinished").replace("<<roundNumber>>", "" + round.getRoundNumber());
+        receiver.sendMessage(msg);
+    }
+
+    // Log messages
+    public void logPluginEnabled() {
+        logger.info(adminMessages.get("plugin.enabled"));
+    }
+
+    public void logPluginDisabled() {
+        logger.info(adminMessages.get("plugin.disabled"));
     }
 
 }

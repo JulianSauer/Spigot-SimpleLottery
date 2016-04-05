@@ -54,8 +54,14 @@ public class ConfigHandler extends ConfigHandlerInterface {
         messages.put("round.winners", getStringFromConfig("messages.round.winners"));
         messages.put("round.noWinners", getStringFromConfig("messages.round.noWinners"));
         messages.put("ticket.bought", getStringFromConfig("messages.ticket.bought"));
-        messages.put("ticket.failure", getStringFromConfig("messages.ticket.failure"));
-        messages.put("ticket.rewardFailure", getStringFromConfig("messages.ticket.rewardFailure"));
+        messages.put("ticket.list", getStringFromConfig("messages.ticket.list"));
+        messages.put("ticket.error.general", getStringFromConfig("messages.ticket.error.general"));
+        messages.put("ticket.error.alreadyExists", getStringFromConfig("messages.ticket.error.alreadyExists"));
+        messages.put("ticket.error.tooMany", getStringFromConfig("messages.ticket.error.tooMany"));
+        messages.put("ticket.error.roundOver", getStringFromConfig("messages.ticket.error.roundOver"));
+        messages.put("ticket.error.tooPoor", getStringFromConfig("messages.ticket.error.tooPoor"));
+        messages.put("ticket.error.reward", getStringFromConfig("messages.ticket.error.reward"));
+        messages.put("permissionError", getStringFromConfig("messages.permissionError"));
 
         return messages;
 

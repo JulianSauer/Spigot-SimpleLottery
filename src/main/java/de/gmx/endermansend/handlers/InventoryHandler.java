@@ -2,6 +2,7 @@ package de.gmx.endermansend.handlers;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 import de.gmx.endermansend.game.Ticket;
+import de.gmx.endermansend.interfaces.ChatHandlerInterface;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -64,7 +65,7 @@ public class InventoryHandler {
      * @param allowedMaterials List of allowed materials from config.yml
      * @return Null if material is not allowed/found in config.yml
      */
-    public static ItemStack getBetFromPlayer(Player player, String material, int amount, List<String> allowedMaterials) {
+    public static ItemStack getBetFromPlayer(Player player, String material, int amount, List<String> allowedMaterials, ChatHandlerInterface chat) {
 
         ItemStack bet = null;
         for (String allowedMaterial : allowedMaterials) {
@@ -75,7 +76,7 @@ public class InventoryHandler {
                 if(player.getInventory().containsAtLeast(bet, bet.getAmount())) {
                     player.getInventory().removeItem(bet);
                 } else {
-                    // TODO: Add some error message like 'you can't afford that'
+                    chat.sendToPoor(player, bet);
                     bet = null;
                 }
                 break;

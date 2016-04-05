@@ -135,7 +135,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                 chat.sendPermissionError(sender);
 
         } else {
-            chat.sendHaveToBePlayerError(sender);
+            chat.sendOnlyPlayersCanDoThat(sender);
         }
         return true;
 
