@@ -1,5 +1,6 @@
 package de.gmx.endermansend.chat;
 
+import de.gmx.endermansend.Config.ConfigHandler;
 import de.gmx.endermansend.game.RoundInterface;
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.Bukkit;
@@ -22,6 +23,8 @@ public class ChatHandler {
 
     public SendHelp sendHelp;
 
+    public ConfigHandler config;
+
     protected String pluginTag;
 
     protected String errorTag;
@@ -37,7 +40,8 @@ public class ChatHandler {
     public ChatHandler(SimpleLottery main) {
 
         logger = main.getLogger();
-        messages = main.getConfigHandler().get.messages();
+        config = main.getConfigHandler();
+        messages = config.get.messages();
         adminMessages = new HashMap<String, String>();
 
         InitializeChat.init(this);

@@ -123,6 +123,18 @@ public abstract class LotteryCoordinatorInterface {
     }
 
     /**
+     * Prints the status of the current round.
+     *
+     * @param sender Receives the status message
+     */
+    public void showStatus(CommandSender sender) {
+        if (round != null)
+            chat.send.status(sender, round);
+        else
+            chat.send.roundStatusError(sender, null);
+    }
+
+    /**
      * Creates a new ticket for a player from the given information.
      *
      * @param player       Player who tries to participate

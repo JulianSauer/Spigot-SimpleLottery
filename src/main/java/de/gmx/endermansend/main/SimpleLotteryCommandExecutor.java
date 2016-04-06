@@ -39,10 +39,16 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                     return halt(sender);
                 else if (args[0].equalsIgnoreCase("resume"))
                     return resume(sender);
+                else if (args[0].equalsIgnoreCase("status"))
+                    return status(sender);
                 else if (args[0].equalsIgnoreCase("list"))
                     return listTicketsPrivate(sender);
                 else if (args[0].equalsIgnoreCase("sendHelp") || args[0].equalsIgnoreCase("?")) {
                     chat.sendHelp.help(sender);
+                    return true;
+                } else if (args[0].equalsIgnoreCase("allowedItems")) {
+                    chat.send.allowedItems(sender);
+                    return true;
                 }
 
             } else if (args.length == 2) {
@@ -152,6 +158,20 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
         if (sender.hasPermission("SimpleLottery.Control"))
             lottery.resume(sender);
+        else
+            chat.send.permissionError(sender);
+        return true;
+    }
+
+    /**
+     * Prints the status of the current round
+     *
+     * @param sender Initiator of the command
+     * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
+     */
+    private boolean status(CommandSender sender) {
+        if (sender.hasPermission("SimpleLottery.Round.Status"))
+            lottery.showStatus(sender);
         else
             chat.send.permissionError(sender);
         return true;

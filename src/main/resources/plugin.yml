@@ -13,6 +13,7 @@ permissions:
       SimpleLottery.Control: op
       SimpleLottery.Round: true
       SimpleLottery.Round.BuyTickets: true
+      SimpleLottery.Round.Status: true
       SimpleLottery.Round.ListTickets: op
       SimpleLottery.Round.ListTickets.Private: op
       SimpleLottery.Round.ListTickets.public: op
