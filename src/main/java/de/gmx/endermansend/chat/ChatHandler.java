@@ -80,7 +80,7 @@ public class ChatHandler {
 
         if (status == RoundInterface.Status.GAME_IS_RUNNING) {
             statusText = messages.get("round.status.running");
-        } else if (status == RoundInterface.Status.GAME_IS_RUNNING) {
+        } else if (status == RoundInterface.Status.GAME_IS_HALTED) {
             statusText = messages.get("round.status.halted");
         } else {
             statusText = messages.get("round.status.finished");

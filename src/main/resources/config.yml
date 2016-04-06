@@ -1,23 +1,31 @@
+# If enabled, lottery rounds are started and stopped automatically
 autoMode:
   enabled: true
   roundInterval: 10
   breakInterval: 5
+
+# Defines round settings
 round:
+  # The winner gets his bet * multiplier as a reward
   multiplier: 10
   allowSameTicketNumbers: true
   allowMoreThanOneEntryPerPlayer: true
-# List of allowed blocks can be found under:
+
+# List of allowed blocks that can be used to bet
+# A complete list can be found under:
 # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
 allowedBlocks:
   - "diamond"
   - "gold_nugget"
   - "gold_ingot"
+
+# Messages that can be seen by players
 messages:
   round:
     start: "Round #<<roundNumber>> started!"
     end: "Round #<<roundNumber>> ended!"
     status:
-      statusMessage: "Game #<<roundNumber>> is <<status>>"
+      statusMessage: "Round #<<roundNumber>> is <<status>>"
       running: "running."
       halted: "halted."
       finished: "over."
