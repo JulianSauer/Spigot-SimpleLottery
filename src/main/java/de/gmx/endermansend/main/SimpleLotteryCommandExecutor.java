@@ -43,7 +43,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                     return status(sender);
                 else if (args[0].equalsIgnoreCase("list"))
                     return listTicketsPrivate(sender);
-                else if (args[0].equalsIgnoreCase("sendHelp") || args[0].equalsIgnoreCase("?")) {
+                else if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
                     chat.sendHelp.help(sender);
                     return true;
                 } else if (args[0].equalsIgnoreCase("allowedItems")) {
@@ -54,7 +54,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
             } else if (args.length == 2) {
 
                 // Command sendHelp
-                if (args[1].equalsIgnoreCase("sendHelp") || args[1].equalsIgnoreCase("?")) {
+                if (args[1].equalsIgnoreCase("help") || args[1].equalsIgnoreCase("?")) {
 
                     if (args[0].equalsIgnoreCase("start")) {
                         chat.sendHelp.start(sender);
@@ -95,7 +95,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
             } else if (args.length == 3) {
 
                 // Command sendHelp
-                if (args[2].equalsIgnoreCase("sendHelp") || args[2].equalsIgnoreCase("?")) {
+                if (args[2].equalsIgnoreCase("help") || args[2].equalsIgnoreCase("?")) {
 
                     if (args[0].equalsIgnoreCase("list")) {
                         if (args[1].equalsIgnoreCase("public")) {
