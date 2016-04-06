@@ -82,16 +82,20 @@ public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {
          */
         private void startNewInterval() {
 
-            int newInterval;
             if (intervalIsARound) {
                 finishGame(null);
-                newInterval = config.get.autoModeBreakInterval();
+                interval = config.get.autoModeBreakInterval();
             } else {
-                newInterval = config.get.autoModeRoundInterval();
+                interval = config.get.autoModeRoundInterval();
             }
-            this.cancel();
+            intervalIsARound = !intervalIsARound;
 
-            (new Counter(newInterval, !intervalIsARound)).runTaskTimerAsynchronously(main, 0L, 20L);
+            if (intervalIsARound) {
+                startNewGame(null);
+                lastStatus = RoundInterface.Status.GAME_IS_RUNNING;
+            } else {
+                lastStatus = RoundInterface.Status.GAME_HAS_FINISHED;
+            }
 
         }
 
