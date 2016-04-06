@@ -75,7 +75,6 @@ public class GetValuesFromConfig {
         messages.put("ticket.error.wrongNumberRange", config.getStringFromConfig("messages.ticket.error.wrongNumberRange"));
         messages.put("ticket.error.alreadyExists", config.getStringFromConfig("messages.ticket.error.alreadyExists"));
         messages.put("ticket.error.tooMany", config.getStringFromConfig("messages.ticket.error.tooMany"));
-        messages.put("ticket.error.roundOver", config.getStringFromConfig("messages.ticket.error.roundOver"));
         messages.put("ticket.error.tooPoor", config.getStringFromConfig("messages.ticket.error.tooPoor"));
         messages.put("ticket.error.reward", config.getStringFromConfig("messages.ticket.error.reward"));
         messages.put("permissionError", config.getStringFromConfig("messages.permissionError"));

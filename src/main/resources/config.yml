@@ -1,8 +1,9 @@
 # If enabled, lottery rounds are started and stopped automatically
 autoMode:
   enabled: true
-  roundInterval: 10
-  breakInterval: 5
+  # Intervals for a round/the break between two rounds in seconds
+  roundInterval: 120
+  breakInterval: 30
 
 # Defines round settings
 round:
@@ -46,7 +47,6 @@ messages:
       wrongNumberRange: "It seems like <<ticketNumber>> is too big/small. The allowed range is: <<min>>-<<max>>"
       alreadyExists: "Looks like <<ticketNumber>> is already taken by someone else."
       tooMany: "Looks like you've already bought a ticket."
-      roundOver: "Couldn't buy ticket because there's no active round right now."
       tooPoor: "It seems like you can't afford <<amount>> <<material>>(S) :("
       reward: "Could not give you your reward. Is your inventory full?"
   permissionError: "You do not have permission to do that!"

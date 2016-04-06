@@ -38,7 +38,7 @@ public class Send {
      * @param receiver Initiator of the command
      * @param round    Interface of the round object which's status should be displayed
      */
-    public void roundStatus(CommandSender receiver, RoundInterface round) {
+    public void status(CommandSender receiver, RoundInterface round) {
         chat.sendMessage(receiver, chat.getRoundStatus(round));
     }
 
@@ -68,10 +68,6 @@ public class Send {
 
     public void tooManyTicketsError(Player receiver) {
         chat.sendErrorMessage(receiver, messages.get("ticket.error.tooMany"));
-    }
-
-    public void roundOverError(Player receiver) {
-        chat.sendErrorMessage(receiver, messages.get("ticket.error.roundOver"));
     }
 
     public void tooPoorError(Player receiver, ItemStack bet) {
