@@ -30,9 +30,12 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                     return start(sender);
                 else if (args[0].equalsIgnoreCase("stop"))
                     return stop(sender);
+                else if (args[0].equalsIgnoreCase("halt"))
+                    return halt(sender);
+                else if (args[0].equalsIgnoreCase("resume"))
+                    return resume(sender);
                 else if (args[0].equalsIgnoreCase("list"))
                     return listTicketsPrivate(sender);
-                // TODO: Add command to pause the game
 
             } else if (args.length == 2) {
 
@@ -67,6 +70,31 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         } else {
             chat.send.permissionError(sender);
         }
+        return true;
+    }
+
+    /**
+     * Tries to halt the current round.
+     *
+     * @param sender Initiator of the command
+     * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
+     */
+    private boolean halt(CommandSender sender) {
+
+        if (sender.hasPermission("SimpleLottery.Control"))
+            lottery.haltGame(sender);
+        else
+            chat.send.permissionError(sender);
+
+        return true;
+    }
+
+    private boolean resume(CommandSender sender) {
+
+        if (sender.hasPermission("SimpleLottery.Control"))
+            lottery.resume(sender);
+        else
+            chat.send.permissionError(sender);
         return true;
     }
 

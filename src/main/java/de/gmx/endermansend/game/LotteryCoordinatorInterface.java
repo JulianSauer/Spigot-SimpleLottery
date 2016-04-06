@@ -55,13 +55,48 @@ public abstract class LotteryCoordinatorInterface {
     }
 
     /**
+     * Halts the current round if possible.
+     *
+     * @param sender Needed to inform initiator about mistakes
+     */
+    public void haltGame(CommandSender sender) {
+
+        if (gameIsNotRunning()) {
+            if (sender != null)
+                chat.send.roundStatusError(sender, round);
+            return;
+        }
+        round.haltGame();
+
+    }
+
+    /**
+     * Restarts the current round if it is halted.
+     *
+     * @param sender Needed to inform initiator about mistakes
+     */
+    public void resume(CommandSender sender) {
+
+        if (round == null) {
+            chat.send.roundStatusError(sender, round);
+            return;
+        }
+
+        if (round.getStatus() == RoundInterface.Status.GAME_IS_HALTED)
+            round.resumeGame();
+        else
+            chat.send.roundStatusError(sender, round);
+
+    }
+
+    /**
      * Finishes the current round if it is not already finished.
      *
      * @param sender Needed to inform initiator about mistakes
      */
     public void finishGame(CommandSender sender) {
 
-        if (gameIsNotRunning()) {
+        if (!gameCanBeFinished()) {
             if (sender != null)
                 chat.send.roundStatusError(sender, round);
             return;
@@ -140,7 +175,21 @@ public abstract class LotteryCoordinatorInterface {
     protected boolean gameIsNotRunning() {
         if (round == null)
             return true;
-        if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED)
+        if (round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED ||
+                round.getStatus() == RoundInterface.Status.GAME_IS_HALTED)
+            return true;
+        return false;
+    }
+
+    /**
+     * Checks if the game can be finished without errors.
+     *
+     * @return False if an error free quitting can't be guaranteed
+     */
+    protected boolean gameCanBeFinished() {
+        if (round == null)
+            return false;
+        if (round.getStatus() != RoundInterface.Status.GAME_HAS_FINISHED)
             return true;
         return false;
     }

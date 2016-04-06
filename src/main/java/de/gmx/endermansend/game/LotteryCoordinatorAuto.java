@@ -41,40 +41,57 @@ public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {
         public void run() {
 
             if (round != null)
-                checkForReset();
-            interval--;
+                processInterval();
+            else {
+                interval--;
+                countdown();
+            }
 
             if (interval < 1) {
                 startNewInterval();
             }
 
-            // Countdown
+        }
+
+        /**
+         * Resets the interval if a round was started/stopped manually.
+         */
+        private void processInterval() {
+
+            if ((lastStatus == RoundInterface.Status.GAME_IS_RUNNING
+                    && round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED)
+                    || (lastStatus == RoundInterface.Status.GAME_IS_HALTED
+                    && round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED)) {
+
+                intervalIsARound = false;
+                interval = config.get.autoModeBreakInterval();
+
+            } else if (lastStatus == RoundInterface.Status.GAME_HAS_FINISHED
+                    && round.getStatus() == RoundInterface.Status.GAME_IS_RUNNING) {
+
+                intervalIsARound = true;
+                interval = config.get.autoModeRoundInterval();
+
+            }
+            lastStatus = round.getStatus();
+
+            if (round.getStatus() != RoundInterface.Status.GAME_IS_HALTED) {
+                interval--;
+                countdown();
+            }
+
+        }
+
+        /**
+         * Prints a countdown to public chat.
+         */
+        private void countdown() {
             if (interval <= 3 && interval > 0) {
                 if (intervalIsARound)
                     chat.broadcast.statusStopsSoon(roundNumber, interval);
                 else
                     chat.broadcast.statusStartsSoon(roundNumber + 1, interval);
             }
-
-        }
-
-        /**
-         * Resets the interval if a round was started/stopped manually
-         */
-        private void checkForReset() {
-
-            if (lastStatus == RoundInterface.Status.GAME_IS_RUNNING
-                    && round.getStatus() == RoundInterface.Status.GAME_HAS_FINISHED) {
-                intervalIsARound = false;
-                interval = config.get.autoModeBreakInterval();
-
-            } else if (lastStatus == RoundInterface.Status.GAME_HAS_FINISHED
-                    && round.getStatus() == RoundInterface.Status.GAME_IS_RUNNING) {
-                intervalIsARound = true;
-                interval = config.get.autoModeRoundInterval();
-            }
-            lastStatus = round.getStatus();
-
         }
 
         /**

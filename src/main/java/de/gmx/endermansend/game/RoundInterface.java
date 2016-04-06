@@ -45,7 +45,7 @@ public abstract class RoundInterface {
         return changeStatusTo(Status.GAME_IS_RUNNING);
     }
 
-    public boolean pauseGame() {
+    public boolean haltGame() {
         return changeStatusTo(Status.GAME_IS_HALTED);
     }
 
@@ -62,7 +62,7 @@ public abstract class RoundInterface {
      * @return List of ticket owners
      */
     public Collection<String> finishRound(int ticketNumber) {
-        status = Status.GAME_HAS_FINISHED;
+        quitGame();
         return handOutRewards(ticketNumber);
     }
 
