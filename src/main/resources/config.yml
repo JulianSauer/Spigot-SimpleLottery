@@ -29,7 +29,7 @@ messages:
     bought: "You succesfully bought a ticket. Your ticket number is <<ticketNumber>>!"
     list: "Bought tickets:"
     error:
-      general: "Couldn't buy ticket with ticket number <<ticketNumber>>."
+      general: "Couldn't buy ticket."
       alreadyExists: "Looks like <<ticketNumber>> is already taken by someone else."
       tooMany: "Looks like you've already bought a ticket."
       roundOver: "Couldn't buy ticket because there's no active round right now."

@@ -74,15 +74,16 @@ public class InventoryHandler {
 
                 if(player.getInventory().containsAtLeast(bet, bet.getAmount())) {
                     player.getInventory().removeItem(bet);
+                    return bet;
                 } else {
                     chat.send.tooPoorError(player, bet);
-                    bet = null;
+                    return null;
                 }
-                break;
 
             }
         }
-        return bet;
+        chat.send.ticketError(player);
+        return null;
 
     }
 

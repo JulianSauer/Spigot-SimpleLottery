@@ -93,14 +93,14 @@ public abstract class LotteryCoordinatorInterface {
 
         ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.get.allowedMaterials(), chat);
         if (bet == null) {
-            chat.send.ticketError(player, ticketNumber);
+            chat.send.ticketError(player);
             return;
         }
 
         if (round.addLotteryEntry(player, ticketNumber, bet)) {
             chat.send.ticketBought(player, ticketNumber);
         } else {
-            chat.send.ticketError(player, ticketNumber);
+            chat.send.ticketError(player);
         }
 
     }

@@ -51,8 +51,8 @@ public class Send {
         chat.sendMessage(receiver, msg);
     }
 
-    public void ticketError(Player receiver, int ticketNumber) {
-        String msg = messages.get("ticket.error.general").replace("<<ticketNumber>>", "" + ticketNumber);
+    public void ticketError(Player receiver) {
+        String msg = messages.get("ticket.error.general");
         chat.sendErrorMessage(receiver, msg);
     }
 
