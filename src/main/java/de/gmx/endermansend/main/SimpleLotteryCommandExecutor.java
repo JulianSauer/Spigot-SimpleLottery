@@ -65,7 +65,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Control")) {
             lottery.startNewGame(sender);
         } else {
-            chat.message.sendPermissionError(sender);
+            chat.send.permissionError(sender);
         }
         return true;
     }
@@ -81,7 +81,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Control"))
             lottery.finishGame(sender);
         else
-            chat.message.sendPermissionError(sender);
+            chat.send.permissionError(sender);
         return true;
     }
 
@@ -96,7 +96,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Round.ListTickets.Private"))
             lottery.listTicketsPrivate(sender);
         else
-            chat.message.sendPermissionError(sender);
+            chat.send.permissionError(sender);
         return true;
     }
 
@@ -111,7 +111,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
         if (sender.hasPermission("SimpleLottery.Round.ListTickets.Public"))
             lottery.listTicketsPublic(sender);
         else
-            chat.message.sendPermissionError(sender);
+            chat.send.permissionError(sender);
         return true;
     }
 
@@ -134,10 +134,10 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                 int amount = Integer.parseInt(args[3]);
                 lottery.addPlayer(player, ticketNumber, material, amount);
             } else
-                chat.message.sendPermissionError(sender);
+                chat.send.permissionError(sender);
 
         } else {
-            chat.message.sendOnlyPlayersCanDoThat(sender);
+            chat.send.onlyPlayersCanDoThatError(sender);
         }
         return true;
 

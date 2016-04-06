@@ -25,13 +25,13 @@ public class SimpleLottery extends JavaPlugin {
         lottery = new LotteryCoordinatorAuto(this);
         this.getCommand("lottery").setExecutor(new SimpleLotteryCommandExecutor(this));
 
-        chat.message.logPluginEnabled();
+        chat.log.pluginEnabled();
 
     }
 
     @Override
     public void onDisable() {
-        chat.message.logPluginDisabled();
+        chat.log.pluginDisabled();
     }
 
     public ConfigHandler getConfigHandler() {

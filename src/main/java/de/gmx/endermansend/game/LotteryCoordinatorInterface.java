@@ -45,12 +45,12 @@ public abstract class LotteryCoordinatorInterface {
         if (round != null) {
             if (round.getStatus() != RoundInterface.Status.GAME_HAS_FINISHED) {
                 if (sender != null)
-                    chat.message.sendRoundStatusError(sender, round);
+                    chat.send.roundStatusError(sender, round);
                 return;
             }
         }
         round = new RoundWithDefaultSettings(main, ++roundNumber);
-        chat.message.broadcastRoundStart(roundNumber);
+        chat.broadcast.roundStart(roundNumber);
 
     }
 
@@ -63,7 +63,7 @@ public abstract class LotteryCoordinatorInterface {
 
         if (gameIsNotRunning()) {
             if (sender != null)
-                chat.message.sendRoundStatusError(sender, round);
+                chat.send.roundStatusError(sender, round);
             return;
         }
 
@@ -72,7 +72,7 @@ public abstract class LotteryCoordinatorInterface {
 
         winners = round.finishRound(winningNumber);
 
-        chat.message.broadcastWinners(roundNumber, winningNumber, winners);
+        chat.broadcast.winners(roundNumber, winningNumber, winners);
 
     }
 
@@ -87,20 +87,20 @@ public abstract class LotteryCoordinatorInterface {
     public void addPlayer(Player player, int ticketNumber, String material, int amount) {
 
         if (gameIsNotRunning()) {
-            chat.message.sendRoundStatusError(player, round);
+            chat.send.roundStatusError(player, round);
             return;
         }
 
         ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.get.allowedMaterials(), chat);
         if (bet == null) {
-            chat.message.sendTicketFailure(player, ticketNumber);
+            chat.send.ticketError(player, ticketNumber);
             return;
         }
 
         if (round.addLotteryEntry(player, ticketNumber, bet)) {
-            chat.message.sendTicketBought(player, ticketNumber);
+            chat.send.ticketBought(player, ticketNumber);
         } else {
-            chat.message.sendTicketFailure(player, ticketNumber);
+            chat.send.ticketError(player, ticketNumber);
         }
 
     }
@@ -113,10 +113,10 @@ public abstract class LotteryCoordinatorInterface {
     public void listTicketsPublic(CommandSender sender) {
 
         if (round == null) {
-            chat.message.sendRoundStatusError(sender, round);
+            chat.send.roundStatusError(sender, round);
             return;
         }
-        chat.message.broadcastBoughtTickets(round);
+        chat.broadcast.boughtTickets(round);
     }
 
     /**
@@ -126,10 +126,10 @@ public abstract class LotteryCoordinatorInterface {
      */
     public void listTicketsPrivate(CommandSender sender) {
         if (round == null) {
-            chat.message.sendRoundStatusError(sender, round);
+            chat.send.roundStatusError(sender, round);
             return;
         }
-        chat.message.sendBoughtTickets(sender, round);
+        chat.send.boughtTickets(sender, round);
     }
 
     /**

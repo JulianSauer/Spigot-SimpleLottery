@@ -51,9 +51,9 @@ public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {
             // Countdown
             if (interval <= 3 && interval > 0) {
                 if (intervalIsARound)
-                    chat.message.broadcastStatusStopsSoon(roundNumber, interval);
+                    chat.broadcast.statusStopsSoon(roundNumber, interval);
                 else
-                    chat.message.broadcastStatusStartsSoon(roundNumber + 1, interval);
+                    chat.broadcast.statusStartsSoon(roundNumber + 1, interval);
             }
 
         }

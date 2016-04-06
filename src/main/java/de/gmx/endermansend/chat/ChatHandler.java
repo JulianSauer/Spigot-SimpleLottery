@@ -1,5 +1,6 @@
 package de.gmx.endermansend.chat;
 
+import de.gmx.endermansend.game.RoundInterface;
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -13,7 +14,11 @@ import java.util.logging.Logger;
  */
 public class ChatHandler {
 
-    public MessageInterface message;
+    public Broadcast broadcast;
+
+    public Log log;
+
+    public Send send;
 
     protected String pluginTag;
 
@@ -32,7 +37,12 @@ public class ChatHandler {
         logger = main.getLogger();
         messages = main.getConfigHandler().get.messages();
         adminMessages = new HashMap<String, String>();
-        message = new Message(this);
+
+        InitializeChat.init(this);
+
+        broadcast = new Broadcast(this);
+        log = new Log(this);
+        send = new Send(this);
 
     }
 
@@ -54,6 +64,28 @@ public class ChatHandler {
 
     protected void sendListEntry(CommandSender receiver, String msg) {
         receiver.sendMessage(listTag + " " + msg);
+    }
+
+    protected String getRoundStatus(RoundInterface round) {
+
+        String statusText;
+
+        RoundInterface.Status status = null;
+        String roundNumber = "0";
+
+        if (round != null) {
+            status = round.getStatus();
+            roundNumber = "" + round.getRoundNumber();
+        }
+
+        if (status == RoundInterface.Status.GAME_IS_RUNNING) {
+            statusText = messages.get("round.status.running");
+        } else if (status == RoundInterface.Status.GAME_IS_RUNNING) {
+            statusText = messages.get("round.status.halted");
+        } else {
+            statusText = messages.get("round.status.finished");
+        }
+        return messages.get("round.status.statusMessage").replace("<<roundNumber>>", roundNumber).replace("<<status>>", statusText);
     }
 
 }
