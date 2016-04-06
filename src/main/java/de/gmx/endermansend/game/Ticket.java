@@ -81,6 +81,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return owner + ": " + ticketNumber;
+        return owner.getName() + ": " + ticketNumber;
     }
 }

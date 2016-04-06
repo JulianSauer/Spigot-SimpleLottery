@@ -38,7 +38,9 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
                 if (args[0].equalsIgnoreCase("list"))
                     if (args[1].equalsIgnoreCase("public"))
-                        listTicketsPublic(sender);
+                        return listTicketsPublic(sender);
+                    else if (args[1].equalsIgnoreCase("private"))
+                        return listTicketsPrivate(sender);
 
             } else if (args.length == 4) {
 
