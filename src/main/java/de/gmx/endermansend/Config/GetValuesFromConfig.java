@@ -60,6 +60,8 @@ public class GetValuesFromConfig {
         HashMap<String, String> messages = new HashMap<String, String>();
         messages.put("round.start", config.getStringFromConfig("messages.round.start"));
         messages.put("round.end", config.getStringFromConfig("messages.round.end"));
+        messages.put("round.time.nextBreak", config.getStringFromConfig("messages.round.time.nextBreak"));
+        messages.put("round.time.nextRound", config.getStringFromConfig("messages.round.time.nextRound"));
         messages.put("round.status.statusMessage", config.getStringFromConfig("messages.round.status.statusMessage"));
         messages.put("round.status.running", config.getStringFromConfig("messages.round.status.running"));
         messages.put("round.status.halted", config.getStringFromConfig("messages.round.status.halted"));

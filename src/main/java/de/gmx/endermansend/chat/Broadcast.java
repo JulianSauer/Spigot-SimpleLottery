@@ -32,6 +32,16 @@ public class Broadcast {
         chat.broadcastMessage(msg);
     }
 
+    public void timeUntilNextBreak(int roundNumber, int seconds) {
+        String msg = messages.get("round.time.nextBreak").replace("<<roundNumber>>", "" + roundNumber).replace("<<seconds>>", "" + seconds);
+        chat.broadcastMessage(msg);
+    }
+
+    public void timeUntilNextRound(int seconds) {
+        String msg = messages.get("round.time.nextRound").replace("<<seconds>>", "" + seconds);
+        chat.broadcastMessage(msg);
+    }
+
     /**
      * Displays the status of the current/last round.
      *

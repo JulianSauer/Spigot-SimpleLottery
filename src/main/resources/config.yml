@@ -29,6 +29,9 @@ messages:
   round:
     start: "Round #<<roundNumber>> started!"
     end: "Round #<<roundNumber>> ended!"
+    time:
+      nextBreak: "Round #<<roundNumber>> ends in <<seconds>>s"
+      nextRound: "New round starts in <<seconds>>s"
     status:
       statusMessage: "Round #<<roundNumber>> is <<status>>"
       running: "running."

@@ -9,7 +9,7 @@ public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {
 
         super(main);
 
-        (new Counter(config.get.autoModeBreakInterval(), false)).runTaskTimerAsynchronously(main, 60L, 20L);
+        (new Counter(false)).runTaskTimerAsynchronously(main, 60L, 20L);
 
     }
 
@@ -24,16 +24,19 @@ public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {
 
         RoundInterface.Status lastStatus;
 
-        public Counter(int interval, boolean intervalIsARound) {
+        public Counter(boolean intervalIsARound) {
 
-            this.interval = interval;
             this.intervalIsARound = intervalIsARound;
 
             if (intervalIsARound) {
+                interval = config.get.autoModeRoundInterval();
                 startNewGame(null);
                 lastStatus = RoundInterface.Status.GAME_IS_RUNNING;
+                chat.broadcast.timeUntilNextBreak(round.getRoundNumber(), interval);
             } else {
+                interval = config.get.autoModeBreakInterval();
                 lastStatus = RoundInterface.Status.GAME_HAS_FINISHED;
+                chat.broadcast.timeUntilNextRound(interval);
             }
 
         }
@@ -102,17 +105,15 @@ public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {
             if (intervalIsARound) {
                 finishGame(null);
                 interval = config.get.autoModeBreakInterval();
+                lastStatus = RoundInterface.Status.GAME_HAS_FINISHED;
+                chat.broadcast.timeUntilNextRound(interval);
             } else {
                 interval = config.get.autoModeRoundInterval();
-            }
-            intervalIsARound = !intervalIsARound;
-
-            if (intervalIsARound) {
                 startNewGame(null);
                 lastStatus = RoundInterface.Status.GAME_IS_RUNNING;
-            } else {
-                lastStatus = RoundInterface.Status.GAME_HAS_FINISHED;
+                chat.broadcast.timeUntilNextBreak(round.getRoundNumber(), interval);
             }
+            intervalIsARound = !intervalIsARound;
 
         }
 
