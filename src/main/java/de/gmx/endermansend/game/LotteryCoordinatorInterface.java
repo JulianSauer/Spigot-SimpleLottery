@@ -49,7 +49,18 @@ public abstract class LotteryCoordinatorInterface {
                 return;
             }
         }
-        round = new RoundWithDefaultSettings(main, ++roundNumber);
+        boolean allowSameTicketNumbers = config.get.roundAllowSameTicketNumbers();
+        boolean allowMoreThanOneEntryPerPlayer = config.get.roundAllowMoreThanOneEntryPerPlayer();
+
+        if (allowSameTicketNumbers && allowMoreThanOneEntryPerPlayer)
+            round = new RoundWithDefaultSettings(main, ++roundNumber);
+        else if (!allowSameTicketNumbers)
+            round = new RoundWithUniqueEntries(main, ++roundNumber);
+        else if (!allowMoreThanOneEntryPerPlayer)
+            round = new RoundWithUniqueParticipants(main, ++roundNumber);
+        else
+            round = new RoundWithUniqueEntries(main, ++roundNumber);
+
         chat.broadcast.roundStart(roundNumber);
 
     }

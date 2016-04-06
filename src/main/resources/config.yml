@@ -3,8 +3,9 @@ autoMode:
   roundInterval: 10
   breakInterval: 5
 round:
-  duration: 5
   multiplier: 10
+  allowSameTicketNumbers: true
+  allowMoreThanOneEntryPerPlayer: true
 # List of allowed blocks can be found under:
 # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
 allowedBlocks:

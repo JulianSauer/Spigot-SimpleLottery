@@ -26,12 +26,16 @@ public class GetValuesFromConfig {
         return config.getIntFromConfig("autoMode.breakInterval");
     }
 
-    public int roundDuration() {
-        return config.getIntFromConfig("round.duration");
-    }
-
     public int roundMultiplier() {
         return config.getIntFromConfig("round.multiplier");
+    }
+
+    public boolean roundAllowSameTicketNumbers() {
+        return config.getBooleanFromConfig("round.allowSameTicketNumbers");
+    }
+
+    public boolean roundAllowMoreThanOneEntryPerPlayer() {
+        return config.getBooleanFromConfig("round.allowMoreThanOneEntryPerPlayer");
     }
 
     public List<String> allowedMaterials() {

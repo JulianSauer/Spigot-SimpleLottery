@@ -2,6 +2,7 @@ package de.gmx.endermansend.main;
 
 import de.gmx.endermansend.Config.ConfigHandler;
 import de.gmx.endermansend.chat.ChatHandler;
+import de.gmx.endermansend.game.LotteryCoordinatorManual;
 import de.gmx.endermansend.helper.LotteryCalculator;
 import de.gmx.endermansend.game.LotteryCoordinatorAuto;
 import de.gmx.endermansend.helper.LotteryCalculatorInterface;
@@ -22,7 +23,11 @@ public class SimpleLottery extends JavaPlugin {
         this.chat = new ChatHandler(this);
         this.calc = new LotteryCalculator(1, 10);
 
-        lottery = new LotteryCoordinatorAuto(this);
+        if (config.get.autoModeEnabled())
+            lottery = new LotteryCoordinatorAuto(this);
+        else
+            lottery = new LotteryCoordinatorManual(this);
+
         this.getCommand("lottery").setExecutor(new SimpleLotteryCommandExecutor(this));
 
         chat.log.pluginEnabled();
