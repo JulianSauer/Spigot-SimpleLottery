@@ -1,7 +1,6 @@
 package de.gmx.endermansend.game;
 
 import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.game.Ticket;
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -53,7 +52,7 @@ public abstract class RoundInterface {
         return changeStatusTo(Status.GAME_HAS_FINISHED);
     }
 
-    public abstract boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet);
+    public abstract void addLotteryEntry(Player player, int ticketNumber, ItemStack bet, ChatHandler chat);
 
     /**
      * Finishes the round and returns the owners of tickets that won.

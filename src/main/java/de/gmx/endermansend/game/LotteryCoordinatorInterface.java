@@ -137,7 +137,7 @@ public abstract class LotteryCoordinatorInterface {
             return;
         }
 
-        if(ticketNumber < calc.getMin() && ticketNumber > calc.getMax()) {
+        if (ticketNumber < calc.getMin() && ticketNumber > calc.getMax()) {
             chat.send.wrongNumberRangeError(player, ticketNumber, calc.getMin(), calc.getMax());
             return;
         }
@@ -148,11 +148,7 @@ public abstract class LotteryCoordinatorInterface {
             return;
         }
 
-        if (round.addLotteryEntry(player, ticketNumber, bet)) {
-            chat.send.ticketBought(player, ticketNumber);
-        } else {
-            chat.send.ticketError(player);
-        }
+        round.addLotteryEntry(player, ticketNumber, bet, chat);
 
     }
 

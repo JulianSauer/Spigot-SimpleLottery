@@ -1,5 +1,6 @@
 package de.gmx.endermansend.game;
 
+import de.gmx.endermansend.chat.ChatHandler;
 import de.gmx.endermansend.helper.InventoryHandler;
 import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.entity.Player;
@@ -25,19 +26,23 @@ public class RoundWithDefaultSettings extends RoundInterface {
      * @param player       Initiator of the lottery entry
      * @param ticketNumber Lottery number the player chose
      * @param bet          Bet the player has made
-     * @return True if entry could be added
+     * @param chat         Used to inform the player if the purchase was successful
      */
-    public boolean addLotteryEntry(Player player, int ticketNumber, ItemStack bet) {
+    public void addLotteryEntry(Player player, int ticketNumber, ItemStack bet, ChatHandler chat) {
 
         Ticket ticket = new Ticket(player, ticketNumber, bet);
 
-        if (tickets.contains(ticket))
-            return false;
+        if (tickets.contains(ticket)) {
+            chat.send.ticketError(player);
+            return;
+        }
 
-        if (!InventoryHandler.giveTicketToPlayer(player, ticket, roundNumber))
-            return false;
+        if (!InventoryHandler.giveTicketToPlayer(player, ticket, roundNumber)) {
+            chat.send.ticketError(player);
+            return;
+        }
         tickets.add(ticket);
-        return true;
+        chat.send.ticketBought(player, ticketNumber);
 
     }
 
