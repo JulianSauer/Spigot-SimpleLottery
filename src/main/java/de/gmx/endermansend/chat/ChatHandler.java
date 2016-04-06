@@ -20,6 +20,8 @@ public class ChatHandler {
 
     public Send send;
 
+    public SendHelp sendHelp;
+
     protected String pluginTag;
 
     protected String errorTag;
@@ -43,6 +45,7 @@ public class ChatHandler {
         broadcast = new Broadcast(this);
         log = new Log(this);
         send = new Send(this);
+        sendHelp = new SendHelp(this);
 
     }
 

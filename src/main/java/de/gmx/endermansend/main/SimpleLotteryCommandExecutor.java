@@ -24,8 +24,13 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("lottery")) {
 
-            if (args.length == 1) {
+            if (args.length == 0) {
+                // Command sendHelp
+                chat.sendHelp.general(sender);
+                return true;
+            } else if (args.length == 1) {
 
+                // Commands
                 if (args[0].equalsIgnoreCase("start"))
                     return start(sender);
                 else if (args[0].equalsIgnoreCase("stop"))
@@ -36,17 +41,71 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
                     return resume(sender);
                 else if (args[0].equalsIgnoreCase("list"))
                     return listTicketsPrivate(sender);
+                else if (args[0].equalsIgnoreCase("sendHelp") || args[0].equalsIgnoreCase("?")) {
+                    chat.sendHelp.help(sender);
+                }
 
             } else if (args.length == 2) {
 
-                if (args[0].equalsIgnoreCase("list"))
+                // Command sendHelp
+                if (args[1].equalsIgnoreCase("sendHelp") || args[1].equalsIgnoreCase("?")) {
+
+                    if (args[0].equalsIgnoreCase("start")) {
+                        chat.sendHelp.start(sender);
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("stop")) {
+                        chat.sendHelp.stop(sender);
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("halt")) {
+                        chat.sendHelp.halt(sender);
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("resume")) {
+                        chat.sendHelp.resume(sender);
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("status")) {
+                        chat.sendHelp.status(sender);
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("list")) {
+                        chat.sendHelp.list(sender);
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("allowedItems")) {
+                        chat.sendHelp.allowedItems(sender);
+                        return true;
+                    } else if (args[0].equalsIgnoreCase("buy")) {
+                        chat.sendHelp.buy(sender);
+                        return true;
+                    }
+
+
+                }
+
+                // Commands
+                else if (args[0].equalsIgnoreCase("list"))
                     if (args[1].equalsIgnoreCase("public"))
                         return listTicketsPublic(sender);
                     else if (args[1].equalsIgnoreCase("private"))
                         return listTicketsPrivate(sender);
 
+            } else if (args.length == 3) {
+
+                // Command sendHelp
+                if (args[2].equalsIgnoreCase("sendHelp") || args[2].equalsIgnoreCase("?")) {
+
+                    if (args[0].equalsIgnoreCase("list")) {
+                        if (args[1].equalsIgnoreCase("public")) {
+                            chat.sendHelp.listPublic(sender);
+                            return true;
+                        } else if (args[1].equalsIgnoreCase("private")) {
+                            chat.sendHelp.listPrivate(sender);
+                            return true;
+                        }
+                    }
+
+                }
+
             } else if (args.length == 4) {
 
+                // Commands
                 if (args[0].equalsIgnoreCase("buy"))
                     return buyTicket(sender, args);
 

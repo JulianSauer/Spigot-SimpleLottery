@@ -4,8 +4,8 @@ author: EndermansEnd
 main: de.gmx.endermansend.main.SimpleLottery
 commands:
   lottery:
-    description: Command for SimpleLottery
-    usage: /lottery <arguments>
+    description: Lists commands for SimpleLottery
+    usage: /lottery
 permissions:
   SimpleLottery.*:
     description: Gives you access to all SimpleLottery commands
