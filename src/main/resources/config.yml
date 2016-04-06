@@ -8,6 +8,10 @@ autoMode:
 round:
   # The winner gets his bet * multiplier as a reward
   multiplier: 10
+  # Defines the range for the ticket numbers
+  numberRange:
+    min: 100
+    max: 999
   allowSameTicketNumbers: true
   allowMoreThanOneEntryPerPlayer: true
 
@@ -39,6 +43,7 @@ messages:
     list: "Bought tickets:"
     error:
       general: "Couldn't buy ticket."
+      wrongNumberRange: "It seems like <<ticketNumber>> is too big/small. The allowed range is: <<min>>-<<max>>"
       alreadyExists: "Looks like <<ticketNumber>> is already taken by someone else."
       tooMany: "Looks like you've already bought a ticket."
       roundOver: "Couldn't buy ticket because there's no active round right now."

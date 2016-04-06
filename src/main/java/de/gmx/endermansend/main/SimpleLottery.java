@@ -21,7 +21,7 @@ public class SimpleLottery extends JavaPlugin {
 
         this.config = new ConfigHandler(this);
         this.chat = new ChatHandler(this);
-        this.calc = new LotteryCalculator(1, 10);
+        this.calc = new LotteryCalculator(config.get.numberRangeMin(), config.get.numberRangeMax());
 
         if (config.get.autoModeEnabled())
             lottery = new LotteryCoordinatorAuto(this);

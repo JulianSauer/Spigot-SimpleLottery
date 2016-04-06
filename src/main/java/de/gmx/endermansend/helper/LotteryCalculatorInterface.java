@@ -9,6 +9,10 @@ public interface LotteryCalculatorInterface {
 
     int[] getRange();
 
+    int getMin();
+
+    int getMax();
+
     boolean setRange(int[] range);
 
     boolean setRange(int min, int max);

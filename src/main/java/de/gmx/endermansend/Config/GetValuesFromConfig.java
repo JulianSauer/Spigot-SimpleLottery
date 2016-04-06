@@ -30,6 +30,14 @@ public class GetValuesFromConfig {
         return config.getIntFromConfig("round.multiplier");
     }
 
+    public int numberRangeMin() {
+        return config.getIntFromConfig("round.numberRange.min");
+    }
+
+    public int numberRangeMax() {
+        return config.getIntFromConfig("round.numberRange.max");
+    }
+
     public boolean roundAllowSameTicketNumbers() {
         return config.getBooleanFromConfig("round.allowSameTicketNumbers");
     }
@@ -64,6 +72,7 @@ public class GetValuesFromConfig {
         messages.put("ticket.bought", config.getStringFromConfig("messages.ticket.bought"));
         messages.put("ticket.list", config.getStringFromConfig("messages.ticket.list"));
         messages.put("ticket.error.general", config.getStringFromConfig("messages.ticket.error.general"));
+        messages.put("ticket.error.wrongNumberRange", config.getStringFromConfig("messages.ticket.error.wrongNumberRange"));
         messages.put("ticket.error.alreadyExists", config.getStringFromConfig("messages.ticket.error.alreadyExists"));
         messages.put("ticket.error.tooMany", config.getStringFromConfig("messages.ticket.error.tooMany"));
         messages.put("ticket.error.roundOver", config.getStringFromConfig("messages.ticket.error.roundOver"));

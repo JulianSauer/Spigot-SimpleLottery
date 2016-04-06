@@ -31,6 +31,14 @@ public class LotteryCalculator implements LotteryCalculatorInterface {
         return new int[0];
     }
 
+    public int getMin() {
+        return range[0];
+    }
+
+    public int getMax() {
+        return range[1];
+    }
+
     /**
      * Sets the range for the lottery numbers. Takes care that the value for max is bigger than min.
      *
