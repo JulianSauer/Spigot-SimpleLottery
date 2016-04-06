@@ -62,6 +62,11 @@ public class Send {
         chat.sendErrorMessage(receiver, msg);
     }
 
+    public void wrongPriceRangeError(Player receiver, int amount, int min, int max) {
+        String msg = messages.get("ticket.error.wrongPriceRange").replace("<<playerPrice>>", "" + amount).replace("<<min>>", "" + min).replace("<<max>>", "" + max);
+        chat.sendErrorMessage(receiver, msg);
+    }
+
     public void alreadyExistsError(Player receiver, int ticketNumber) {
         String msg = messages.get("ticket.error.alreadyExists").replace("<<ticketNumber>>", "" + ticketNumber);
         chat.sendErrorMessage(receiver, msg);

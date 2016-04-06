@@ -236,9 +236,18 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
 
             if (sender.hasPermission("SimpleLottery.Round.BuyTickets")) {
                 Player player = (Player) sender;
-                int ticketNumber = Integer.parseInt(args[1]);
+
+                int ticketNumber;
+                int amount;
+                try {
+                    ticketNumber = Integer.parseInt(args[1]);
+                    amount = Integer.parseInt(args[3]);
+                } catch (NumberFormatException e) {
+                    chat.sendHelp.buy(sender);
+                    return true;
+                }
                 String material = args[2];
-                int amount = Integer.parseInt(args[3]);
+
                 lottery.addPlayer(player, ticketNumber, material, amount);
             } else
                 chat.send.permissionError(sender);

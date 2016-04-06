@@ -152,6 +152,12 @@ public abstract class LotteryCoordinatorInterface {
         if (ticketNumber < calc.getMin() || ticketNumber > calc.getMax()) {
             chat.send.wrongNumberRangeError(player, ticketNumber, calc.getMin(), calc.getMax());
             return;
+        } else if (amount <= 0) {
+            chat.sendHelp.buy(player);
+            return;
+        } else if (amount < config.get.priceRangeMin() || amount > config.get.priceRangeMax()) {
+            chat.send.wrongPriceRangeError(player, amount, config.get.priceRangeMin(), config.get.priceRangeMax());
+            return;
         }
 
         ItemStack bet = InventoryHandler.getBetFromPlayer(player, material, amount, config.get.allowedMaterials(), chat);

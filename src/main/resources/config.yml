@@ -13,6 +13,9 @@ round:
   numberRange:
     min: 100
     max: 999
+  priceRange:
+    min: 1
+    max: 16
   allowSameTicketNumbers: true
   allowMoreThanOneEntryPerPlayer: true
 
@@ -47,7 +50,8 @@ messages:
     list: "Bought tickets:"
     error:
       general: "Couldn't buy ticket."
-      wrongNumberRange: "It seems like <<ticketNumber>> is too big/small. The allowed range is: <<min>>-<<max>>"
+      wrongNumberRange: "It seems like <<ticketNumber>> is too small/big. The allowed range is: <<min>>-<<max>>"
+      wrongPriceRange: "It seems like <<playerPrice>> is too small/big. The allowed range is: <<min>>-<<max>>"
       alreadyExists: "Looks like <<ticketNumber>> is already taken by someone else."
       tooMany: "Looks like you've already bought a ticket."
       tooPoor: "It seems like you can't afford <<amount>> <<material>>(S) :("
