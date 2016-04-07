@@ -16,7 +16,7 @@ import java.util.Collection;
  */
 public abstract class LotteryCoordinatorInterface {
 
-    protected int roundNumber = 0;
+    protected int roundNumber;
 
     protected SimpleLottery main;
 
@@ -33,6 +33,7 @@ public abstract class LotteryCoordinatorInterface {
         this.config = main.getConfigHandler();
         this.calc = main.getCalc();
         this.chat = main.getChat();
+        roundNumber = config.get.roundNumber();
     }
 
     /**
@@ -195,6 +196,10 @@ public abstract class LotteryCoordinatorInterface {
             return;
         }
         chat.send.boughtTickets(sender, round);
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
     }
 
     /**

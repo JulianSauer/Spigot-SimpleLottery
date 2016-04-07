@@ -4,7 +4,6 @@ import de.gmx.endermansend.main.SimpleLottery;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -16,6 +15,7 @@ import java.util.logging.Logger;
 public class ConfigHandler {
 
     public GetValuesFromConfig get;
+    public SetValuesInConfig set;
 
     private SimpleLottery main;
     private Logger logger;
@@ -30,6 +30,7 @@ public class ConfigHandler {
             createDefaultConfig();
 
         get = new GetValuesFromConfig(this);
+        set = new SetValuesInConfig(this);
 
     }
 
@@ -108,6 +109,17 @@ public class ConfigHandler {
         else if (list.isEmpty())
             noListFound(path);
         return list;
+    }
+
+    /**
+     * Saves/updates an int value under the given path
+     *
+     * @param path  Path to the variable
+     * @param value Value that should be saved
+     */
+    protected void setIntInConfig(String path, int value) {
+        config.set(path, value);
+        saveConfig();
     }
 
     /**

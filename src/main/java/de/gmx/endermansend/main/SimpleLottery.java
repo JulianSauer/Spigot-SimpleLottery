@@ -36,6 +36,7 @@ public class SimpleLottery extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        config.set.roundNumber(lottery.getRoundNumber());
         chat.log.pluginDisabled();
     }
 

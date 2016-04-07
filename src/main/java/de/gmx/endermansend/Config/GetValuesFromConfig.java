@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Defines paths for config.yml values.
+ * Defines paths to get values from config.yml
  */
 public class GetValuesFromConfig {
 
@@ -24,6 +24,10 @@ public class GetValuesFromConfig {
 
     public int autoModeBreakInterval() {
         return config.getIntFromConfig("autoMode.breakInterval");
+    }
+
+    public int roundNumber() {
+        return config.getIntFromConfig("round.roundNumber");
     }
 
     public int roundMultiplier() {
