@@ -227,7 +227,7 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
      * Requires permission 'Round.BuyTickets'
      *
      * @param sender Initiator will receive an error if he/she isn't a player
-     * @param args   {"buy", "<ticketNumber>", "<material>", "<amount>"}
+     * @param args   {"buy", "<ticketNumber>", "<amount>", "<material>"}
      * @return Always returns true because Bukkit's command handling is retarded for commands with arguments
      */
     private boolean buyTicket(CommandSender sender, String[] args) {
@@ -237,16 +237,16 @@ public class SimpleLotteryCommandExecutor implements CommandExecutor {
             if (sender.hasPermission("SimpleLottery.Round.BuyTickets")) {
                 Player player = (Player) sender;
 
-                int ticketNumber;
                 int amount;
+                int ticketNumber;
                 try {
                     ticketNumber = Integer.parseInt(args[1]);
-                    amount = Integer.parseInt(args[3]);
+                    amount = Integer.parseInt(args[2]);
                 } catch (NumberFormatException e) {
                     chat.sendHelp.buy(sender);
                     return true;
                 }
-                String material = args[2];
+                String material = args[3];
 
                 lottery.addPlayer(player, ticketNumber, material, amount);
             } else

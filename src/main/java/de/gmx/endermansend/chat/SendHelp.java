@@ -74,7 +74,7 @@ public class SendHelp {
         messages.put("buy",
                 new String[]{
                         "Buys a new ticket with the specified ticket number for the amount of items",
-                        "Usage: /lottery buy <ticketNumber> <item> <amount>"
+                        "Usage: /lottery buy <ticketNumber> <amount> <item>"
                 });
         messages.put("allowedItems",
                 new String[]{
