@@ -1,4 +1,4 @@
-package de.gmx.endermansend.Config;
+package de.gmx.endermansend.simpleLottery.config;
 
 /**
  * Defines paths to set values in config.yml.

@@ -1,6 +1,6 @@
-package de.gmx.endermansend.game;
+package de.gmx.endermansend.simpleLottery.game;
 
-import de.gmx.endermansend.main.SimpleLottery;
+import de.gmx.endermansend.simpleLottery.main.SimpleLottery;
 
 public class LotteryCoordinatorManual extends LotteryCoordinatorInterface {
 

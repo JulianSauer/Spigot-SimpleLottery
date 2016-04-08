@@ -1,10 +1,10 @@
-package de.gmx.endermansend.game;
+package de.gmx.endermansend.simpleLottery.game;
 
-import de.gmx.endermansend.Config.ConfigHandler;
-import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.helper.InventoryHandler;
-import de.gmx.endermansend.helper.LotteryCalculatorInterface;
-import de.gmx.endermansend.main.SimpleLottery;
+import de.gmx.endermansend.simpleLottery.config.ConfigHandler;
+import de.gmx.endermansend.simpleLottery.chat.ChatHandler;
+import de.gmx.endermansend.simpleLottery.helper.InventoryHandler;
+import de.gmx.endermansend.simpleLottery.helper.LotteryCalculatorInterface;
+import de.gmx.endermansend.simpleLottery.main.SimpleLottery;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -1,6 +1,6 @@
-package de.gmx.endermansend.Config;
+package de.gmx.endermansend.simpleLottery.config;
 
-import de.gmx.endermansend.main.SimpleLottery;
+import de.gmx.endermansend.simpleLottery.main.SimpleLottery;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -40,7 +40,7 @@ public class ConfigHandler {
     public void saveConfig() {
         logger.info("Saving config");
         main.saveConfig();
-        logger.info("Config saved");
+        logger.info("config saved");
     }
 
     /**

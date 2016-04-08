@@ -1,7 +1,7 @@
 name: SimpleLottery
 version: 1.0
 author: EndermansEnd
-main: de.gmx.endermansend.main.SimpleLottery
+main: de.gmx.endermansend.simpleLottery.main.SimpleLottery
 commands:
   lottery:
     description: Lists commands for SimpleLottery

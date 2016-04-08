@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.gmx.endermansend</groupId>
-    <artifactId>Spigot-SimpleLottery</artifactId>
+    <artifactId>SimpleLottery</artifactId>
     <version>1.0</version>
 
     <repositories>

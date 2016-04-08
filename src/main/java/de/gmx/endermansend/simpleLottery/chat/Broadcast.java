@@ -1,7 +1,7 @@
-package de.gmx.endermansend.chat;
+package de.gmx.endermansend.simpleLottery.chat;
 
-import de.gmx.endermansend.game.RoundInterface;
-import de.gmx.endermansend.game.Ticket;
+import de.gmx.endermansend.simpleLottery.game.RoundInterface;
+import de.gmx.endermansend.simpleLottery.game.Ticket;
 
 import java.util.ArrayList;
 import java.util.Collection;

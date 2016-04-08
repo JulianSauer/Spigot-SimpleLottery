@@ -1,4 +1,4 @@
-package de.gmx.endermansend.helper;
+package de.gmx.endermansend.simpleLottery.helper;
 
 /**
  * Calculates a winning number based on the given range.

@@ -1,4 +1,4 @@
-package de.gmx.endermansend.helper;
+package de.gmx.endermansend.simpleLottery.helper;
 
 /**
  * Implements the calculation methods for determining a winner.

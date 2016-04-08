@@ -1,6 +1,6 @@
-package de.gmx.endermansend.game;
+package de.gmx.endermansend.simpleLottery.game;
 
-import de.gmx.endermansend.main.SimpleLottery;
+import de.gmx.endermansend.simpleLottery.main.SimpleLottery;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class LotteryCoordinatorAuto extends LotteryCoordinatorInterface {

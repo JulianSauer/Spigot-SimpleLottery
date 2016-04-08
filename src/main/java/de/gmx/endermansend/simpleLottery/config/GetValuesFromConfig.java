@@ -1,4 +1,4 @@
-package de.gmx.endermansend.Config;
+package de.gmx.endermansend.simpleLottery.config;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,18 +1,18 @@
-package de.gmx.endermansend.game;
+package de.gmx.endermansend.simpleLottery.game;
 
-import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.main.SimpleLottery;
+import de.gmx.endermansend.simpleLottery.chat.ChatHandler;
+import de.gmx.endermansend.simpleLottery.main.SimpleLottery;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class RoundWithUniqueTicketNumbers extends RoundWithDefaultSettings {
+public class RoundWithUniqueParticipants extends RoundWithDefaultSettings {
 
-    public RoundWithUniqueTicketNumbers(SimpleLottery main, int roundNumber) {
+    public RoundWithUniqueParticipants(SimpleLottery main, int roundNumber) {
         super(main, roundNumber);
     }
 
     /**
-     * Allows only one entry per ticketNumber per round.
+     * Allows only one entry per player per round.
      *
      * @param player       Initiator of the lottery entry
      * @param ticketNumber Lottery number the player chose
@@ -23,8 +23,8 @@ public class RoundWithUniqueTicketNumbers extends RoundWithDefaultSettings {
     public void addLotteryEntry(Player player, int ticketNumber, ItemStack bet, ChatHandler chat) {
 
         for (Ticket t : tickets) {
-            if (ticketNumber == t.getTicketNumber()) {
-                chat.send.alreadyExistsError(player, ticketNumber);
+            if (t.getOwner().equals(player)) {
+                chat.send.tooManyTicketsError(player);
                 return;
             }
         }

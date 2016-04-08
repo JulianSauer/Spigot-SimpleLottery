@@ -1,4 +1,4 @@
-package de.gmx.endermansend.chat;
+package de.gmx.endermansend.simpleLottery.chat;
 
 import org.bukkit.command.CommandSender;
 

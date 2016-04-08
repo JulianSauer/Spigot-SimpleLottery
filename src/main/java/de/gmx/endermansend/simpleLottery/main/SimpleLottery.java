@@ -1,12 +1,12 @@
-package de.gmx.endermansend.main;
+package de.gmx.endermansend.simpleLottery.main;
 
-import de.gmx.endermansend.Config.ConfigHandler;
-import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.game.LotteryCoordinatorManual;
-import de.gmx.endermansend.helper.LotteryCalculator;
-import de.gmx.endermansend.game.LotteryCoordinatorAuto;
-import de.gmx.endermansend.helper.LotteryCalculatorInterface;
-import de.gmx.endermansend.game.LotteryCoordinatorInterface;
+import de.gmx.endermansend.simpleLottery.config.ConfigHandler;
+import de.gmx.endermansend.simpleLottery.chat.ChatHandler;
+import de.gmx.endermansend.simpleLottery.game.LotteryCoordinatorManual;
+import de.gmx.endermansend.simpleLottery.helper.LotteryCalculator;
+import de.gmx.endermansend.simpleLottery.game.LotteryCoordinatorAuto;
+import de.gmx.endermansend.simpleLottery.helper.LotteryCalculatorInterface;
+import de.gmx.endermansend.simpleLottery.game.LotteryCoordinatorInterface;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SimpleLottery extends JavaPlugin {

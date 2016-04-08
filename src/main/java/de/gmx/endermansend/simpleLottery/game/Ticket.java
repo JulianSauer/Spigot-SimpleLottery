@@ -1,4 +1,4 @@
-package de.gmx.endermansend.game;
+package de.gmx.endermansend.simpleLottery.game;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

@@ -1,7 +1,7 @@
-package de.gmx.endermansend.game;
+package de.gmx.endermansend.simpleLottery.game;
 
-import de.gmx.endermansend.chat.ChatHandler;
-import de.gmx.endermansend.main.SimpleLottery;
+import de.gmx.endermansend.simpleLottery.chat.ChatHandler;
+import de.gmx.endermansend.simpleLottery.main.SimpleLottery;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
