@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * Represents a basic round in the game. Handles a list of tickets.
@@ -71,7 +72,7 @@ public abstract class RoundInterface {
 
     public abstract Collection<Ticket> getTickets();
 
-    public abstract Collection<Integer> getTicketsOf(Player player);
+    public abstract Collection<Integer> getTicketsOf(UUID player);
 
     public abstract Collection<Ticket> getWinningTickets(int winningNumber);
 

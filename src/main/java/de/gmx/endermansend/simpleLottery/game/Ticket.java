@@ -1,10 +1,11 @@
 package de.gmx.endermansend.simpleLottery.game;
 
-import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Represents a basic lottery ticket and can be used to store the number, owner and bet of a ticket as well as
@@ -14,11 +15,11 @@ public class Ticket {
 
     private int ticketNumber;
 
-    private Player owner;
+    private UUID owner;
 
     private ItemStack bet;
 
-    public Ticket(Player owner, int ticketNumber, ItemStack bet) {
+    public Ticket(UUID owner, int ticketNumber, ItemStack bet) {
         this.owner = owner;
         this.ticketNumber = ticketNumber;
         this.bet = bet;
@@ -28,8 +29,12 @@ public class Ticket {
         return ticketNumber;
     }
 
-    public Player getOwner() {
+    public UUID getOwner() {
         return owner;
+    }
+
+    public String getOwnerName() {
+        return Bukkit.getOfflinePlayer(owner).getName();
     }
 
     public ItemStack getBet() {
@@ -81,6 +86,6 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return owner.getName() + ": " + ticketNumber;
+        return Bukkit.getOfflinePlayer(owner).getName() + ": " + ticketNumber;
     }
 }

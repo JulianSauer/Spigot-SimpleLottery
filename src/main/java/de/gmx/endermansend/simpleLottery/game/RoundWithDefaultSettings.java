@@ -3,12 +3,15 @@ package de.gmx.endermansend.simpleLottery.game;
 import de.gmx.endermansend.simpleLottery.chat.ChatHandler;
 import de.gmx.endermansend.simpleLottery.helper.InventoryHandler;
 import de.gmx.endermansend.simpleLottery.main.SimpleLottery;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Represents a round in the lottery where multiple players can bet on the same number as well as have multiple tickets.
@@ -30,7 +33,7 @@ public class RoundWithDefaultSettings extends RoundInterface {
      */
     public void addLotteryEntry(Player player, int ticketNumber, ItemStack bet, ChatHandler chat) {
 
-        Ticket ticket = new Ticket(player, ticketNumber, bet);
+        Ticket ticket = new Ticket(player.getUniqueId(), ticketNumber, bet);
 
         if (tickets.contains(ticket)) {
             chat.send.ticketError(player);
@@ -54,11 +57,11 @@ public class RoundWithDefaultSettings extends RoundInterface {
      * @param player Object who's tickets are asked for
      * @return All ticketNumbers of a player
      */
-    public Collection<Integer> getTicketsOf(Player player) {
+    public Collection<Integer> getTicketsOf(UUID player) {
 
         List<Integer> playerTickets = new ArrayList<Integer>();
 
-        Player owner;
+        UUID owner;
         for (Ticket t : tickets) {
             owner = t.getOwner();
             if (owner.equals(player))
@@ -81,7 +84,7 @@ public class RoundWithDefaultSettings extends RoundInterface {
 
         for (Ticket t : tickets) {
             if (ticketNumber == t.getTicketNumber())
-                owners.add(t.getOwner().getName());
+                owners.add(t.getOwnerName());
         }
 
         return owners;
@@ -117,10 +120,12 @@ public class RoundWithDefaultSettings extends RoundInterface {
         Collection<String> winners = new ArrayList<String>();
 
         for (Ticket t : winningTickets) {
-            Player player = t.getOwner();
-            winners.add(player.getName());
-            if (!(InventoryHandler.giveRewardToPlayer(player, t.getReward(multiplier))))
-                chat.send.rewardError(player);
+            OfflinePlayer player = Bukkit.getOfflinePlayer(t.getOwner());
+            if (player.isOnline()) {
+                winners.add(player.getName());
+                if (!(InventoryHandler.giveRewardToPlayer((Player) player, t.getReward(multiplier))))
+                    chat.send.rewardError((Player) player);
+            }
         }
 
         return winners;
